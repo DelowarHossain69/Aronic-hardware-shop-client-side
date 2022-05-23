@@ -8,6 +8,7 @@ import Navbar from './components/shared/Navbar/Navbar';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Login/Register';
 import ForgetPassword from './components/pages/Login/ForgetPassword';
+import Products from './components/pages/Products/Products';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 
       <Routes>
             <Route path='/' element={<Home />}></Route>
+            <Route path='/products' element={<Products />}></Route>
             <Route path='/login' element={<Login />}></Route>
             <Route path='/forget-password' element={<ForgetPassword />}></Route>
             <Route path='/register' element={<Register />}></Route>
