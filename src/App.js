@@ -1,11 +1,14 @@
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './components/pages/Home/Home';
 import Footer from './components/shared/Footer/Footer';
 import Navbar from './components/shared/Navbar/Navbar';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Login/Register';
 import ForgetPassword from './components/pages/Login/ForgetPassword';
+
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
             <Route path='/register' element={<Register />}></Route>
       </Routes>
       <Footer />
+
+      {/* Toast container */}
+      <ToastContainer />
     </div>
   );
 }

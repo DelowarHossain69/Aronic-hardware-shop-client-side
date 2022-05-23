@@ -11,7 +11,7 @@ import {
 import useToken from "./../../../hooks/useToken";
 
 const Register = () => {
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, user, loading, registerError] =
     useCreateUserWithEmailAndPassword(auth);
   const [updateProfile, updating] = useUpdateProfile(auth);
   const {
@@ -144,6 +144,8 @@ const Register = () => {
           </Link>
 
           <LoginWithGoogle />
+
+          <p className="mt-3 text-red-500">{registerError && registerError.message}</p>
         </div>
       </div>
     </section>

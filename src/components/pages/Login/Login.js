@@ -8,7 +8,7 @@ import useToken from './../../../hooks/useToken';
 import Loading from "../../shared/Loading/Loading";
 
 const Login = () => {
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, user, loading, loginError] =
     useSignInWithEmailAndPassword(auth);    
   const [token] = useToken(user);
   const location = useLocation();
@@ -120,6 +120,8 @@ const Login = () => {
           </p>
 
           <LoginWithGoogle />
+
+          <p className="mt-3 text-red-500">{loginError && loginError.message}</p>
         </div>
       </div>
     </section>
