@@ -1,37 +1,40 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LoginWithGoogle from "./LoginWithGoogle";
 import auth from "./../../../firebase.init";
 import Loading from "../../shared/Loading/Loading";
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
+import useToken from "./../../../hooks/useToken";
 
 const Register = () => {
-  const [createUserWithEmailAndPassword, loading, error] =
+  const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
-    const [updateProfile, updating] = useUpdateProfile(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+  const [token] = useToken(user);
 
-  if (loading) {
+  if (token) {
+    navigate("/");
+  }
+
+  if (loading || updating) {
     return <Loading />;
   }
 
+
   const onSubmit = async (data) => {
-      const userInfo = {
-          name : data.name,
-          email : data.email,
-          role : 'user'
-      }
-
-      await createUserWithEmailAndPassword(data.email, data.password);
-      await updateProfile({displayName: data.name});
-
-      
-  }
+    await createUserWithEmailAndPassword(data.email, data.password);
+    await updateProfile({ displayName: data.name });
+  };
 
   return (
     <section className="my-24">
