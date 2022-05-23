@@ -19,8 +19,8 @@ const ProductCart = ({product}) => {
             <h4 className="font-bold text-lg">Available quantity : {maxQuantity}</h4>
         </div>
         <p>
-            {description.length > 200 ? description.slice(0, 200) : description}
-            {description.length > 200 && ' ....'}
+            {description?.length > 200 ? description.slice(0, 200) : description}
+            {description?.length > 200 && ' ....'}
         </p>
         <div class="card-actions">
           <button class="btn btn-secondary w-full text-lg">Place order</button>

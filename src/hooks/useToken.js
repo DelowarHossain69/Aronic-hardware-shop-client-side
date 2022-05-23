@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-const useToken = ({user}) => {
+const useToken = (user) => {
     const [token, setToken] = useState('');
-    const email = user?.email;
-
+    const email = user?.user?.email;
+    console.log(user, email);
    useEffect(()=>{
        
     if(email){
@@ -13,8 +13,8 @@ const useToken = ({user}) => {
             'content-type' : 'application/json'
         },
         body: JSON.stringify({
-            email : user.email,
-            name : email.displayName,
+            email : user?.user?.email,
+            name : user?.user?.displayName,
         })
       })
       .then(res => res.json())

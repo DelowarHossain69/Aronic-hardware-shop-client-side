@@ -1,17 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
+import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LoginWithGoogle from "./LoginWithGoogle";
+import auth from "./../../../firebase.init";
+import useToken from './../../../hooks/useToken';
+import Loading from "../../shared/Loading/Loading";
 
 const Login = () => {
-  const [needForgetPass, setNeedForgetPass] = useState(false);
+  const [signInWithEmailAndPassword, user, loading, error] =
+    useSignInWithEmailAndPassword(auth);    
+  const [token] = useToken(user);
+  const location = useLocation();
+  const navigate = useNavigate();
+  const from = location?.state?.from?.pathname || '/';
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (data) => {
+    signInWithEmailAndPassword(data.email, data.password);
+  };
+
+  if(loading){
+      return <Loading />
+  }
+
+  if(token){
+      navigate(from, {replace : true});
+  }
 
   return (
     <section className="my-24">
@@ -56,36 +76,36 @@ const Login = () => {
               </label>
             </div>
 
-              <div class="form-control w-full max-w-xs">
-                <label class="label">
-                  <span class="label-text font-bold">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="Enter your password here..."
-                  class="input input-bordered w-full max-w-xs"
-                  {...register("password", {
-                    required: {
-                      value: true,
-                      message: "Password is required",
-                    },
-                    // pattern: {
-                    //   value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
-                    //   message: "Please enter a valid email",
-                    // },
-                  })}
-                />
-                <label class="label">
-                  {errors.password?.type === "required" && (
-                    <span class="label-text-alt text-sm font-bold text-red-500">
-                      {errors.password.message}
-                    </span>
-                  )}
-                  {/* {errors.email?.type === 'pattern' && <span class="label-text-alt text-sm font-bold">{errors.email.message}</span>} */}
-                </label>
-              </div>
+            <div class="form-control w-full max-w-xs">
+              <label class="label">
+                <span class="label-text font-bold">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Enter your password here..."
+                class="input input-bordered w-full max-w-xs"
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                  // pattern: {
+                  //   value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/,
+                  //   message: "Please enter a valid email",
+                  // },
+                })}
+              />
+              <label class="label">
+                {errors.password?.type === "required" && (
+                  <span class="label-text-alt text-sm font-bold text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
+                {/* {errors.email?.type === 'pattern' && <span class="label-text-alt text-sm font-bold">{errors.email.message}</span>} */}
+              </label>
+            </div>
 
-              <button className="btn btn-secondary w-full">Login</button>
+            <button className="btn btn-secondary w-full">Login</button>
           </form>
 
           <p className="mt-3">
@@ -95,9 +115,9 @@ const Login = () => {
             </strong>
           </p>
 
-            <p className="mt-3 font-bold">
-                <Link to='/forget-password'>Forget password?</Link>
-            </p>
+          <p className="mt-3 font-bold">
+            <Link to="/forget-password">Forget password?</Link>
+          </p>
 
           <LoginWithGoogle />
         </div>

@@ -32,8 +32,12 @@ const Register = () => {
 
 
   const onSubmit = async (data) => {
+    const userInfo = {
+        displayName : data.name,
+        photoURL : 'https://i.ibb.co/Z6Sh6Vj/admin-user-icon-24.png',
+    }
     await createUserWithEmailAndPassword(data.email, data.password);
-    await updateProfile({ displayName: data.name });
+    await updateProfile(userInfo);
   };
 
   return (
