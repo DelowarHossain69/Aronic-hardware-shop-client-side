@@ -1,0 +1,58 @@
+[
+    {
+      "img": "https://i.ibb.co/brSPrJY/product1-600x.webp",
+      "price": 230,
+      "name": "REDUCERS & ADAPTERS",
+      "minQuantity": 220,
+      "maxQuantity": 110,
+      "description": "claw hammer, 8 inch adjustable wrench, multi-purpose post 7-10mm sleeve, 3 meter tape measure, parts box, 5PCS hex wrench, wire cutter, 10PCS batch head, digital display electric pen, 3mm screwdriver word cross, art Knife, electrical tape"
+    },
+    {
+      "img": "https://i.ibb.co/Pt00pMX/product18-70da4d32-c08f-47b9-9bf1-f0ec27b87dc0-600x.webp",
+      "price": 347,
+      "name": "THE VISE",
+      "minQuantity": 60,
+      "maxQuantity": 198,
+      "description": "Multifunction 31 in 1 Precision Handle Mini Screw driver set Mobile Phone Watch Laptop Repair Kit Tools Household Accessories"
+    },
+    {
+      "img": "https://i.ibb.co/pKgFgTX/product15-cbbfd503-5aad-4d1f-b47f-8ff8c3af1cf7-600x.webp",
+      "price": 256,
+      "name": "HACKSAW BLADES KIT",
+      "minQuantity": 180,
+      "maxQuantity": 170,
+      "description": "ORIN Electric Air Blower Machine 2 in 1 Premium Quality 1000 Watts e portable electric dust removing air blower is the right device to help you clean dust from your computer, electrical gadgets, kitchen appliances, and other devices or any difficult corner of the house where cleaning with a wet mop is near to impossible."
+    },
+    {
+      "img": "https://i.ibb.co/J75tzF0/product28-b6beb2f3-9b6f-4918-9529-6a27a19ecfc4-600x.webp",
+      "price": 253,
+      "name": "MONKEY SPANNERS",
+      "minQuantity": 120,
+      "maxQuantity": 318,
+      "description": "Made of high-quality material, the air blower is durable and long-lasting. Besides, the lock-on button guarantees you a lot more convenience while cleaning. ."
+    },
+    {
+      "img": "https://i.ibb.co/QJ0zwwm/product25-a0bc1aca-1422-482e-a99e-611a9d2cc140-600x.webp",
+      "price": 270,
+      "name": "HAMMER SET",
+      "minQuantity": 70,
+      "maxQuantity": 326,
+      "description": "Micro Drill Bit 1mm Straight Shank High Speed Steel Twist Drill Bits HSS Wood Drilling Tools Electric Power Tools"
+    },
+    {
+      "img": "https://i.ibb.co/3cVD1vB/product12-31bd55cf-6146-46ae-a11c-8fc2f076edde-600x.webp",
+      "price": 212,
+      "name": "CLAMPS & REDUCERS",
+      "minQuantity": 200,
+      "maxQuantity": 78,
+      "description": "8'' Yabon Combination Pliers electric plus. The grinder engraving kit is necessary for DIY carving and grinding.Small volume, light weight, easily carry, comfort grip handle."
+    },
+    {
+      "img": "https://i.ibb.co/DgC5fwf/product32-9b1e0e9a-d130-4c20-b1ef-2ae3183d314d-600x.webp",
+      "price": 268,
+      "name": "CARPENTRY TOOLS SET",
+      "minQuantity": 372,
+      "maxQuantity": 45,
+      "description": "6'' Cable Cutter Plastic Handle Electric Wire Stripper Cutting Plier Tool Kit Only the above package content, other products are not included.The grinder engraving kit is necessary for DIY carving and grinding.Small volume"
+    }
+  ]
