@@ -1,5 +1,6 @@
 import React from 'react';
 import { useQuery } from 'react-query';
+import Loading from '../../shared/Loading/Loading';
 import ProductCart from '../Home/Products/ProductCart';
 
 const Products = () => {
@@ -7,6 +8,10 @@ const Products = () => {
         fetch('http://localhost:5000/products')
         .then(res => res.json())
     )
+
+    if(isLoading){
+        return <Loading />
+    }
 
     return (
         <section className='py-24'>

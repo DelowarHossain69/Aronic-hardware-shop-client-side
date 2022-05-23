@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const ProductCart = ({product}) => {
-    const {name, price, description, img, maxQuantity, minQuantity} = product;
+    const {name, price, description, img, maxQuantity, minQuantity, _id} = product;
   return (
     <div class="card bg-base-100 shadow-xl">
       <figure class="px-5 pt-10">
@@ -22,8 +23,10 @@ const ProductCart = ({product}) => {
             {description?.length > 200 ? description.slice(0, 200) : description}
             {description?.length > 200 && ' ....'}
         </p>
-        <div class="card-actions">
-          <button class="btn btn-secondary w-full text-lg">Place order</button>
+        <div class="card-actions mt-3">
+            <Link to={`/purchese/${_id}`} className="block w-full">
+              <button class="btn btn-secondary w-full text-lg">Place order</button>
+            </Link>
         </div>
       </div>
     </div>
