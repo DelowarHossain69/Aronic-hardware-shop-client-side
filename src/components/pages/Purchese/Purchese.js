@@ -50,10 +50,11 @@ const Purchese = () => {
       paid : false,
       email : user?.email,
       customer : user?.displayName,
-      status : 'pending',
+      status : 'Pending',
       price : total,
       phone,
       shippingAddress,
+      productImg : img,
     }
 
     if(_id){

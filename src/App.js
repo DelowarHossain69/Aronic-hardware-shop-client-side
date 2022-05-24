@@ -11,7 +11,10 @@ import Register from './components/pages/Login/Register';
 import ForgetPassword from './components/pages/Login/ForgetPassword';
 import Products from './components/pages/AllProducts/AllProducts';
 import Purchese from './components/pages/Purchese/Purchese';
-import Dashboard from './components/pages/Home/Dashboard/Dashboard';
+import Dashboard from './components/pages/Dashboard/Dashboard';
+import Orders from './components/pages/Dashboard/Orders';
+import AddReviews from './components/pages/Dashboard/AddReviews';
+import Profile from './components/pages/Dashboard/Profile';
 
 
 function App() {
@@ -36,7 +39,11 @@ function App() {
               <RequireAuth>
                   <Dashboard />
               </RequireAuth>
-            }></Route>
+            }>
+              <Route index element={<Orders />} />
+              <Route path='addReview' element={<AddReviews />} />
+              <Route path='profile' element={<Profile />} />
+            </Route>
 
       </Routes>
       <Footer />

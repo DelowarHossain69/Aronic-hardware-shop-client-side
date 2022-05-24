@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLineChart } from "@fortawesome/free-solid-svg-icons";
+import { Link, Outlet } from "react-router-dom";
 
 const Dashboard = () => {
   return (
@@ -21,17 +22,22 @@ const Dashboard = () => {
 
       <div class="drawer drawer-mobile">
         <input id="dashboard-sideBar" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content flex flex-col items-center justify-center">
-          sass
+        <div class="drawer-content">
+          
+            <Outlet />
+
         </div>
         <div class="drawer-side">
           <label for="dashboard-sideBar" class="drawer-overlay"></label>
           <ul class="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
             <li>
-              <a>Sidebar Item 1</a>
+              <Link to='/dashboard'>My Orders</Link>
             </li>
             <li>
-              <a>Sidebar Item 2</a>
+              <Link to='/dashboard/addReview'>Add review</Link>
+            </li>
+            <li>
+              <Link to='/dashboard/profile'>My profile</Link>
             </li>
           </ul>
         </div>
