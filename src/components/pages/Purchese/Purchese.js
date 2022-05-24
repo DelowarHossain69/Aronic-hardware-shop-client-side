@@ -25,7 +25,7 @@ const Purchese = () => {
 
   const handleQuantity = (e) => {
     const quantity = e.target.value;
-    setQuantity(quantity)
+    setQuantity(quantity);
   };
 
   if (loading) {
@@ -35,12 +35,12 @@ const Purchese = () => {
   return (
     <section className="grid grid-cols-1 lg:grid-cols-5 my-24 rounded space-x-8 space-y-8">
       <div className="col-span-3">
-        <div class="hero min-h-screen bg-base-200 rounded">
+        <div class="hero min-h-screen bg-[#dddddd29] rounded shadow-xl">
           <div class="hero-content flex-col lg:flex-row space-x-5 items-start">
             <div className="lg:w-1/2">
               <img
                 src={img}
-                class="max-w-full rounded-lg shadow-2xl"
+                class="max-w-full rounded-lg "
                 alt="product pic"
               />
             </div>
@@ -67,26 +67,29 @@ const Purchese = () => {
                     min={minQuantity}
                     value={quantity}
                   />
-
                 </p>
               </form>
 
               <div>
-                      <h2 className="text-xl font-bold mt-8 mb-3">Order Summary</h2>
-                      <table >
-                        <tr>
-                          <td>Subtotal ({quantity || minQuantity} Items)</td>
-                          <td> : $ {price * (quantity || minQuantity)} </td>
-                        </tr>
-                        <tr>
-                          <td>Shipping Fee</td>
-                          <td>: $ {5 * (quantity || minQuantity)} </td>
-                        </tr>
-                        <tr>
-                          <td>Total:	</td>
-                          <td>: $ {(5 * (quantity || minQuantity)) + price * (quantity || minQuantity)} </td>
-                        </tr>
-                      </table>
+                <h2 className="text-xl font-bold mt-8 mb-3">Order Summary</h2>
+                <table>
+                  <tr>
+                    <td>Subtotal ({quantity || minQuantity} Items)</td>
+                    <td> : $ {price * (quantity || minQuantity)} </td>
+                  </tr>
+                  <tr>
+                    <td>Shipping Fee</td>
+                    <td>: $ {5 * (quantity || minQuantity)} </td>
+                  </tr>
+                  <tr>
+                    <td>Total: </td>
+                    <td>
+                      : ${" "}
+                      {5 * (quantity || minQuantity) +
+                        price * (quantity || minQuantity)}{" "}
+                    </td>
+                  </tr>
+                </table>
               </div>
             </div>
           </div>
@@ -97,14 +100,40 @@ const Purchese = () => {
         </div>
       </div>
 
-      <div className="col-span-2">
-        <h2 className="text-xl mb-3">Shipping & Billing</h2>
-        <div class="form-control w-full max-w-xs">
-          <label class="label">
-            <span class="label-text">Your name</span>
-          </label>
-          <input type="text" class="input input-bordered w-full max-w-xs" />
-        </div>
+      <div className="lg:col-span-2">
+        
+        <form action="" className="space-y-5 w-full  md:w-4/5 lg:max-w-full lg:w-full mx-auto shadow-lg p-5 rounded">
+        <h2 className="text-xl mb-3 font-bold">Shipping & Billing</h2>
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text  text-lg">Your name</span>
+            </label>
+            <input type="text" class="input input-bordered w-full text-lg" value={user?.displayName}  disabled/>
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text  text-lg">Your Email</span>
+            </label>
+            <input type="text" class="input input-bordered w-full text-lg" value={user?.email}  disabled/>
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text  text-lg">Phone*</span>
+            </label>
+            <input type="number" class="input input-bordered w-full text-lg" required />
+          </div>
+
+          <div class="form-control w-full">
+            <label class="label">
+              <span class="label-text  text-lg">Address*</span>
+            </label>
+            <input type="text" class="input input-bordered w-full text-lg" required placeholder="Your address"/>
+          </div>
+          
+          <button className="btn btn-secondary w-full">Place order</button>
+        </form>
       </div>
     </section>
   );
