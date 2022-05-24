@@ -11,6 +11,7 @@ import Register from './components/pages/Login/Register';
 import ForgetPassword from './components/pages/Login/ForgetPassword';
 import Products from './components/pages/AllProducts/AllProducts';
 import Purchese from './components/pages/Purchese/Purchese';
+import Dashboard from './components/pages/Home/Dashboard/Dashboard';
 
 
 function App() {
@@ -21,14 +22,22 @@ function App() {
       <Routes>
             <Route path='/' element={<Home />}></Route>
             <Route path='/products' element={<Products />}></Route>
+            <Route path='/login' element={<Login />}></Route>
+            <Route path='/forget-password' element={<ForgetPassword />}></Route>
+            <Route path='/register' element={<Register />}></Route>
+
             <Route path='/purchese/:id' element={
               <RequireAuth>
                   <Purchese />
               </RequireAuth>
             }></Route>
-            <Route path='/login' element={<Login />}></Route>
-            <Route path='/forget-password' element={<ForgetPassword />}></Route>
-            <Route path='/register' element={<Register />}></Route>
+
+            <Route path='dashboard' element={
+              <RequireAuth>
+                  <Dashboard />
+              </RequireAuth>
+            }></Route>
+
       </Routes>
       <Footer />
 
