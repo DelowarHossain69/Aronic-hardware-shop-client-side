@@ -1,8 +1,9 @@
 import React from 'react';
-import BestOffer from './BestOffer';
+import BestOffer from './BestOffer/BestOffer';
 import Products from './Products/Products';
-import Slider from './Slide';
+import Slider from './Slider/Slide';
 import BusenessSummery from './BusinessSummery/BusenessSummery';
+import Reviews from './Reviews/Reviews';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <BestOffer/>
             <Products/>
             <BusenessSummery/>
+            <Reviews />
         </div>
     );
 };
