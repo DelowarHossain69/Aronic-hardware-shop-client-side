@@ -4,16 +4,51 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase.init";
 import Loading from "../../shared/Loading/Loading";
+import { toast } from 'react-toastify';
 
 const AddReviews = () => {
   const [user, loading] = useAuthState(auth);
   const [ratingCount, setRatingCount] = useState(2);
+  const [isLoading, setLoading] = useState(false);
 
   const handleComment = (e) => {
       e.preventDefault();
+      setLoading(true);
+
+      const name = user?.displayName;
+      const img = user?.photoURL;
+      const comment = e.target.comment.value;
+      const rating = ratingCount;
+
+      const ratingInfo = {
+        name,
+        img,
+        comment,
+        rating,
+    }
+    console.log(ratingInfo)
+
+      fetch(`http://localhost:5000/rating?email=${user?.email}`, {
+          method : 'POST',
+          headers : {
+              'content-type' : 'application/json',
+              auth : `Bearer ${localStorage.getItem('accessToken')}`
+          },
+          body : JSON.stringify(ratingInfo)
+      })
+      .then(res => res.json())
+      .then(data => {
+
+        if(data.insertedId){
+        setLoading(false);
+        toast.success('Your comment has been added.');
+        e.target.reset();
+        }
+
+      });
   };
 
-  if (loading) {
+  if (loading || isLoading) {
     return <Loading />;
   }
 
@@ -33,6 +68,7 @@ const AddReviews = () => {
             
           <textarea
             class="textarea textarea-bordered w-full h-28 my-4 text-lg"
+            name='comment'
             placeholder="Your comment"
             maxLength="250"
            autoFocus></textarea>
@@ -52,6 +88,7 @@ const AddReviews = () => {
               class="mask mask-star-2 bg-orange-400"
               checked
               onClick={()=> setRatingCount(2)}
+              
             />
             <input
               type="radio"
@@ -75,7 +112,7 @@ const AddReviews = () => {
           </div>
 
           <div className="mt-6 text-center">
-            <button className="btn btn-secondary">Add comment</button>
+            <button className="btn btn-secondary" disabled={! user}>Add comment</button>
           </div>
         </form>
       </div>
