@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./../../../firebase.init";
 import Loading from "../../shared/Loading/Loading";
+import { toast } from 'react-toastify';
 
 const Purchese = () => {
+  const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
   const [product, setProduct] = useState({});
   const { name, price, description, img, maxQuantity, minQuantity, _id } =
     product;
+
   const [quantity, setQuantity] = useState(minQuantity);
 
   useEffect(() => {
@@ -27,7 +30,52 @@ const Purchese = () => {
     const quantity = e.target.value;
     setQuantity(quantity);
   };
+  
+  // Calculate order summery
+  const productQuantity  =  quantity || minQuantity;
+  const subTotal = price *  productQuantity;
+  const shipping = 5 * productQuantity;
+  const total = subTotal + shipping;
 
+
+  const handlePlaceOrder = e =>{
+    e.preventDefault();
+    const phone = e.target.phone.value;
+    const shippingAddress = e.target.shippingAddress.value;
+
+    const orderInfo = {
+      productName : name,
+      quantity : productQuantity,
+      productId : _id,
+      paid : false,
+      email : user?.email,
+      customer : user?.displayName,
+      status : 'pending',
+      price : total,
+      phone,
+      shippingAddress,
+    }
+
+    if(_id){
+      fetch(`http://localhost:5000/order?email=${user?.email}`, {
+        method : "POST",
+        headers: {
+          'content-type' : 'application/json',
+          auth : `Bearer ${localStorage.getItem('accessToken')}`
+        },
+        body: JSON.stringify(orderInfo)
+      })
+      .then(res => res.json())
+      .then(data => {
+        if(data.insertedId){
+          toast.success('Your order have been complete. Continue shopping');
+          navigate('/products');
+        }
+      })
+    }
+
+  }
+  
   if (loading) {
     return <Loading />;
   }
@@ -74,20 +122,16 @@ const Purchese = () => {
                 <h2 className="text-xl font-bold mt-8 mb-3">Order Summary</h2>
                 <table>
                   <tr>
-                    <td>Subtotal ({quantity || minQuantity} Items)</td>
-                    <td> : $ {price * (quantity || minQuantity)} </td>
+                    <td>Subtotal ({productQuantity} Items)</td>
+                    <td> : $ {subTotal} </td>
                   </tr>
                   <tr>
                     <td>Shipping Fee</td>
-                    <td>: $ {5 * (quantity || minQuantity)} </td>
+                    <td>: $  {shipping}</td>
                   </tr>
                   <tr>
                     <td>Total: </td>
-                    <td>
-                      : ${" "}
-                      {5 * (quantity || minQuantity) +
-                        price * (quantity || minQuantity)}{" "}
-                    </td>
+                    <td>: $ {total}</td>
                   </tr>
                 </table>
               </div>
@@ -102,7 +146,7 @@ const Purchese = () => {
 
       <div className="lg:col-span-2">
         
-        <form action="" className="space-y-5 w-full  md:w-4/5 lg:max-w-full lg:w-full mx-auto shadow-lg p-5 rounded">
+        <form action="" className="space-y-5 w-full  md:w-4/5 lg:max-w-full lg:w-full mx-auto shadow-lg p-5 rounded" onSubmit={handlePlaceOrder}>
         <h2 className="text-xl mb-3 font-bold">Shipping & Billing</h2>
           <div class="form-control w-full">
             <label class="label">
@@ -122,14 +166,14 @@ const Purchese = () => {
             <label class="label">
               <span class="label-text  text-lg">Phone*</span>
             </label>
-            <input type="number" class="input input-bordered w-full text-lg" required />
+            <input type="number" name='phone' class="input input-bordered w-full text-lg" required />
           </div>
 
           <div class="form-control w-full">
             <label class="label">
-              <span class="label-text  text-lg">Address*</span>
+              <span class="label-text  text-lg">Shipping address*</span>
             </label>
-            <input type="text" class="input input-bordered w-full text-lg" required placeholder="Your address"/>
+            <input type="text" name='shippingAddress' class="input input-bordered w-full text-lg" required placeholder="Your address"/>
           </div>
           
           <button className="btn btn-secondary w-full">Place order</button>
