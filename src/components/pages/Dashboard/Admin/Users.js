@@ -8,16 +8,22 @@ import withReactContent from "sweetalert2-react-content";
 
 const Users = () => {
   const MySwal = withReactContent(Swal);
+  const defaultImage = 'https://i.ibb.co/Z6Sh6Vj/admin-user-icon-24.png';
   const [user, loading] = useAuthState(auth);
-    const defaultImage = 'https://i.ibb.co/Z6Sh6Vj/admin-user-icon-24.png';
   // Load users
   const {
     data: users,
     isLoading,
     refetch,
   } = useQuery("allUser", () =>
-    fetch(`http://localhost:5000/allUser`).then((res) => res.json())
+    fetch(`http://localhost:5000/allUser?email=${user?.email}`, {
+        headers : {
+            auth : `Bearer ${localStorage.getItem('accessToken')}`
+        }
+    }).then((res) => res.json())
   );
+
+  console.log(users);
 
   const handleAdmin = async (info, e) => {
     console.log(e.target.value);

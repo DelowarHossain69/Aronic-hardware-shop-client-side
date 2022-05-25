@@ -7,7 +7,7 @@ const useToken = (user) => {
     const image = user?.user?.photoURL;
    useEffect(()=>{
        
-    if(email){
+    if(image && name){
         fetch('http://localhost:5000/user', {
         method : 'PUT',
         headers : {
