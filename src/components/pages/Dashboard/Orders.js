@@ -3,30 +3,68 @@ import { useQuery } from "react-query";
 import auth from "../../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../../shared/Loading/Loading";
+import useDeleteOrder from './../../../hooks/useDeleteOrder';
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import DeleteModal from "./DeleteModal";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content'
+const MySwal = withReactContent(Swal)
+
+
 
 const Orders = () => {
   const [user, loading] = useAuthState(auth);
-  const [deleteOrder, setDeleteOrder] = useState(null);
+  const [deleteOrder, setDeleteOrder] = useState({});
 
+  const [deleted] = useDeleteOrder(deleteOrder); 
+
+  
   const {
     data: orders,
     isLoading,
     refetch,
   } = useQuery(["myOrders", user], () =>
-    fetch(`http://localhost:5000/orders?email=${user?.email}`, {
-      headers: {
-        auth: `Bearer ${localStorage.getItem("accessToken")}`,
-      },
-    }).then((res) => res.json())
+  fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+    headers: {
+      auth: `Bearer ${localStorage.getItem("accessToken")}`,
+    },
+  }).then((res) => res.json())
   );
-
+  
   if (isLoading || loading) {
     return <Loading />;
   }
-  // const {productName,quantity, paid, status, price, productImg} = orders;
+  
+  if(deleted){
+    refetch();
+  }
+
+  // Delete confirm alert;
+  const handleDeleteOrder = (order) => {
+    MySwal.fire({
+      title: '<strong>Are you sure?</strong>',
+      icon: 'question',
+      html:
+        `<h2>${order?.productName}</h2>
+          <h3>Price : $${order?.price} </h3>
+          <h3>Quantity : ${order?.quantity} </h3>
+        `,
+
+      isConfirmed: true,
+      showCancelButton: true,
+      focusConfirm: false,
+      confirmButtonText: 'Delete',
+      confirmButtonAriaLabel: 'Thumbs up, great!',
+      cancelButtonText:
+        '<i class="fa fa-thumbs-down">Cancel</i>',
+      cancelButtonAriaLabel: 'Thumbs down'
+    })
+    .then(res => {
+      if(res.isConfirmed){
+        setDeleteOrder(order);
+      }
+    });
+
+  }
 
   return (
     <section>
@@ -69,11 +107,9 @@ const Orders = () => {
                         <button
                           className="btn btn-sm"
                           disabled={orders?.status === "cancel"}
-                        >
-                          Pay
-                        </button>
+                        >Pay </button>
 
-                        <label for="deleteOrder" class="btn btn-sm ml-2 bg-red-500 modal-button" onClick={() => setDeleteOrder(order)}>Cancel</label>
+                        <button  class="btn btn-sm ml-2 bg-red-500 modal-button" onClick={()=> handleDeleteOrder(order)}>Cancel</button>
                       </>
                     )}
                   </td>
@@ -84,7 +120,7 @@ const Orders = () => {
         </div>
       )}
 
-      {orders?.length == 0 && (
+      {orders?.length === 0 && (
         <div className="flex justify-center items-center mt-24 flex-col">
           <h2 className="text-2xl">No orders available!</h2>
           <Link to="/products">
@@ -93,11 +129,6 @@ const Orders = () => {
             </button>
           </Link>
         </div>
-      )}
-
-      {/* Delete modal */}
-      {deleteOrder && (
-        <DeleteModal setDeleteOrder={setDeleteOrder} order={deleteOrder} refetch={refetch} user={user} />
       )}
     </section>
   );

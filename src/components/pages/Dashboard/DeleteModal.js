@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { toast } from 'react-toastify';
 
+
 const DeleteModal = ({ order, refetch, setDeleteOrder, user}) => {
   const {productName,quantity, paid, status, price, productImg, _id} = order;
 

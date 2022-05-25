@@ -71,7 +71,7 @@ const AddReviews = () => {
             name='comment'
             placeholder="Your comment"
             maxLength="250"
-           autoFocus></textarea>
+           autoFocus required></textarea>
 
             <h2 className="mb-3 font-bold text-lg">Double click to add ratings ({ratingCount} star)</h2>
           <div class="rating space-x-2">
@@ -112,7 +112,7 @@ const AddReviews = () => {
           </div>
 
           <div className="mt-6 text-center">
-            <button className="btn btn-secondary" disabled={! user}>Add comment</button>
+            <button className="btn btn-secondary" disabled={! user}>Add Review</button>
           </div>
         </form>
       </div>
