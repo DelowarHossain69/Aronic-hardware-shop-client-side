@@ -9,53 +9,44 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import { useQuery } from "react-query";
 
 const Profile = () => {
   const MySwal = withReactContent(Swal);
-  const [picLoading, setPicLoading] = useState(false);
   const [user, loading] = useAuthState(auth);
   const [isDisabold, setDisabold] = useState(true);
-  const [updateProfile, updating, error] = useUpdateProfile(auth);
+  const [updateProfile, updating] = useUpdateProfile(auth);
+  const [updatedProfileImage, setUpdatedProfileImage] = useState("");
   const [fbLink, setFbLink] = useState("");
   const [linkdinLink, setLinkdinLink] = useState("");
   const [githubLink, setGithubLink] = useState("");
 
+  // get profle info
+  const {
+    data: profileInfo,
+    isLoading,
+    refetch,
+  } = useQuery(["getProfile", user], () =>
+    fetch(`http://localhost:5000/user?email=${user?.email}`, {
+      headers: {
+        auth: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    }).then((res) => res.json())
+  );
+
   // Handle profile pic
   const handleProfilePricUrl = async () => {
-    const { value: file } = await Swal.fire({
-      title: "Select image",
-      input: "file",
-      inputAttributes: {
-        accept: "image/*",
-        "aria-label": "Upload your profile picture",
-      },
-    });
-
-    if (!file) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append("image", file);
-    const apiKey = `db1cf374ed982951ad44a2316caee95e`;
-    const url = `https://api.imgbb.com/1/upload?key=${apiKey}`;
-    // prifile pic uploading
-    setPicLoading(true);
-
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then(async (data) => {
-        if (data?.success) {
-          await updateProfile({ photoURL: data?.url });
-
-          // prifile pic upload finish
-          setPicLoading(false);
-          toast.success("Profile pic updated");
+    const photo = await MySwal.fire({
+      title: "Your photo URL",
+      input: "text",
+      inputLabel: "Your IP address",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "You need to give photo url!";
         }
-      });
+      },
+    }).then((res) => setUpdatedProfileImage(res.value));
   };
 
   // get social media link using alert
@@ -83,27 +74,50 @@ const Profile = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const updatedName = e.target?.name?.value;
-    const updatedPhone = e.target.phone?.value;
-    const updatedAddress = e.target.address?.value;
-    const gender = e.target.gender?.value;
+    const updatedName =
+      e.target?.name?.value || profileInfo?.name || user?.displayName;
+    const updatedPhone = e.target.phone?.value || profileInfo?.phone;
+    const updatedAddress = e.target.address?.value || profileInfo?.address;
+    const gender = e.target.gender?.value || profileInfo?.gender;
+    const education = e.target.education.value || profileInfo?.education;
 
     const updatedInfo = {
       name: updatedName,
       phone: updatedPhone,
       address: updatedAddress,
+      education: education,
       gender: gender,
+      image: updatedProfileImage || user?.photoURL,
       socialMedia: {
-        fb: fbLink,
-        linkdin: linkdinLink,
-        gitHub: githubLink,
+        fb: fbLink || profileInfo?.socialMedia?.fb,
+        linkdin: linkdinLink || profileInfo?.socialMedia?.linkdin,
+        gitHub: githubLink || profileInfo?.socialMedia?.gitHub,
       },
     };
-
-    console.log(updatedInfo);
+    console.log(updatedInfo, updatedProfileImage)
+    // update data in database
+    fetch(`http://localhost:5000/updateUser?email=${user?.email}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+        auth: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+      body: JSON.stringify(updatedInfo),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result.success) {
+          updateProfile({
+            displayName: updatedName,
+            photoURL: updatedProfileImage || user?.photoURL,
+          });
+          toast.success("Your information updated.");
+          refetch();
+        }
+      });
   };
 
-  if (loading || updating || picLoading) {
+  if (loading || updating || isLoading) {
     return <Loading />;
   }
 
@@ -118,9 +132,11 @@ const Profile = () => {
               alt=""
             />
             <h2 className=" font-bold text-xl">{user?.displayName}</h2>
-            <h3 className="text-lg">Phone : 000000</h3>
-            <h3 className="text-lg">Gender : </h3>
-            <h3 className="text-lg">Address</h3>
+            <h3 className="text-lg">
+              Phone : {profileInfo?.phone || "0100000000"}
+            </h3>
+            <h3 className="text-lg">Gender : {profileInfo?.gender}</h3>
+            <h3 className="text-lg">{profileInfo?.address}</h3>
 
             <button className="btn mt-3" onClick={handleProfilePricUrl}>
               Update Pic
@@ -129,17 +145,17 @@ const Profile = () => {
 
           <div className="bg-white p-3 rounded mt-5">
             <div className="flex items-center justify-between">
-              <Link to="#" className="flex items-center text-xl">
+              <a href={profileInfo?.socialMedia?.fb || "#"} className="flex items-center text-xl">
                 <img
                   className="w-10 mb-5 mr-2 mt-4"
                   src="https://i.ibb.co/JyFbkD2/facebook.png"
                   alt=""
                 />
                 <span>Facebook</span>
-              </Link>
+              </a>
 
               <div>
-                {fbLink && (
+                {(fbLink || profileInfo?.socialMedia?.fb) && (
                   <FontAwesomeIcon
                     icon={faCheck}
                     className="text-xl cursor-pointer mr-3 text-green-600 font-bold"
@@ -157,17 +173,17 @@ const Profile = () => {
             </div>
 
             <div className="flex items-center justify-between">
-              <Link to="#" className="flex items-center text-xl">
+              <a href={profileInfo?.socialMedia?.linkdin || "#"} className="flex items-center text-xl">
                 <img
                   className="w-10 mb-5 mr-2 mt-4"
                   src="https://i.ibb.co/C1YXjwj/linkedin.png"
                   alt=""
                 />
                 <span>Link din</span>
-              </Link>
+              </a>
 
               <div>
-                {linkdinLink && (
+                {(linkdinLink || profileInfo?.socialMedia?.linkdin) && (
                   <FontAwesomeIcon
                     icon={faCheck}
                     className="text-xl cursor-pointer mr-3 text-green-600 font-bold"
@@ -185,17 +201,17 @@ const Profile = () => {
             </div>
 
             <div className="flex items-center justify-between">
-              <Link to="#" className="flex items-center text-xl">
+              <a href={profileInfo?.socialMedia?.gitHub || "#"} className="flex items-center text-xl">
                 <img
                   className="w-10 mb-5 mr-2 mt-4"
                   src="https://i.ibb.co/Y3QZmSg/github1.png"
                   alt=""
                 />
                 <span>Facebook</span>
-              </Link>
+              </a>
 
               <div>
-                {githubLink && (
+                {(githubLink || profileInfo?.socialMedia?.gitHub) && (
                   <FontAwesomeIcon
                     icon={faCheck}
                     className="text-xl cursor-pointer mr-3 text-green-600 font-bold"
@@ -255,6 +271,14 @@ const Profile = () => {
                 name="phone"
               />
 
+              <input
+                type="text"
+                class=" w-full border-0 border-b-2 outline-0 py-4"
+                placeholder="Education"
+                disabled={isDisabold}
+                name="education"
+              />
+
               <textarea
                 name="address"
                 className="border-b-2 outline-none w-full mt-3 h-24"
@@ -268,7 +292,7 @@ const Profile = () => {
                 <input
                   type="radio"
                   name="gender"
-                  value="male"
+                  value="Male"
                   id="gender"
                   class="radio mr-2"
                   disabled={isDisabold}
@@ -280,7 +304,7 @@ const Profile = () => {
                 <input
                   type="radio"
                   name="gender"
-                  id="female"
+                  id="Female"
                   value="female"
                   class="radio mr-2"
                   disabled={isDisabold}
