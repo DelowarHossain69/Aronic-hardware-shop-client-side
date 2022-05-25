@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 const useToken = (user) => {
     const [token, setToken] = useState('');
     const email = user?.user?.email;
-    console.log(user, email);
+    const name = user?.user?.displayName;
+    const image = user?.user?.photoURL;
    useEffect(()=>{
        
     if(email){
@@ -15,6 +16,7 @@ const useToken = (user) => {
         body: JSON.stringify({
             email : user?.user?.email,
             name : user?.user?.displayName,
+            image : user?.user?.photoURL
         })
       })
       .then(res => res.json())
@@ -26,7 +28,7 @@ const useToken = (user) => {
       });
     }
 
-   }, [user, email]);
+   }, [user, email, image, name]);
 
     return [token];
 };
