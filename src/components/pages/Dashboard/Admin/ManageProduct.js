@@ -56,6 +56,7 @@ const ManageProduct = () => {
         }
       });
     } else if (action === "update") {
+        navigate(`/dashboard/updateProduct/${product._id}`);
     }
   };
 

@@ -24,6 +24,7 @@ import useAdmin from './hooks/useAdmin';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import Loading from './components/shared/Loading/Loading';
+import UpdateProduct from './components/pages/Dashboard/Admin/UpdateProduct';
 
 
 function App() {
@@ -65,7 +66,7 @@ function App() {
                   <ManageOrders />
                 </RequireAdmin>
               } />}
-              
+
               <Route path='users' element={
                 <RequireAdmin>
                   <Users />
@@ -81,6 +82,12 @@ function App() {
               <Route path='manageProducts' element={
                 <RequireAdmin>
                   <ManageProduct />
+                </RequireAdmin>
+              } />
+
+              <Route path='updateProduct/:id' element={
+                <RequireAdmin>
+                  <UpdateProduct />
                 </RequireAdmin>
               } />
 
