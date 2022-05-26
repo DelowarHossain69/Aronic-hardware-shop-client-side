@@ -4,12 +4,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./../../../../firebase.init";
 import Loading from "../../../shared/Loading/Loading";
 import { useQuery } from "react-query";
+import { toast } from "react-toastify";
 
 const UpdateProduct = () => {
+    const [availableQuantity, setAvailableQuantity] = useState(0);
   const [user, loading] = useAuthState(auth);
   const { id } = useParams();
-
-  const { data: product, isLoading } = useQuery(
+    console.log(availableQuantity);
+  const { data: product, isLoading, refetch } = useQuery(
     ["updateProduct", id, user],
     () =>
       fetch(`http://localhost:5000/product/${id}?email=${user?.email}`, {
@@ -25,7 +27,7 @@ const UpdateProduct = () => {
         const name = e.target.name.value || product?.name;
         const price = e.target.price.value || product?.price;
         const maxQuantity = e.target.maxQuantity.value || product?.maxQuantity;
-        const minQuantity = e.target.name.value || product?.minQuantity;
+        const minQuantity = e.target.minQuantity.value || product?.minQuantity;
         const description = e.target.description.value || product?.description;
         const img = e.target.img.value || product?.img;
 
@@ -38,7 +40,24 @@ const UpdateProduct = () => {
             description
         }
 
-        console.log(updatedProduct)
+        // Action database
+        const url = `http://localhost:5000/product/${product._id}?email=${user?.email}`;
+        fetch(url, {
+            method : 'PUT',
+            headers: {
+                'content-type' : 'application/json',
+                auth: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+            body : JSON.stringify(updatedProduct)
+        })
+        .then(res => res.json())
+        .then(result => {
+            if(result.modifiedCount){
+                toast.success('The product has been updated');
+                refetch();
+                e.target.reset();
+            }
+        });
       }
 
   if (loading || isLoading) {
@@ -90,6 +109,7 @@ const UpdateProduct = () => {
                     placeholder="Price"
                     class="input input-bordered"
                     name='price'
+                    min='0'
                   />
                 </div>
 
@@ -102,6 +122,8 @@ const UpdateProduct = () => {
                     placeholder="Available quantity"
                     class="input input-bordered"
                     name='maxQuantity'
+                    min='0'
+                    onChange={(e)=> setAvailableQuantity(e.target.value)}
                   />
                 </div>
 
@@ -114,6 +136,7 @@ const UpdateProduct = () => {
                     placeholder="Minimum order"
                     class="input input-bordered"
                     name='minQuantity'
+                    max={availableQuantity}
                   />
                 </div>
 
@@ -122,7 +145,7 @@ const UpdateProduct = () => {
                     <span class="label-text">Photo URL</span>
                   </label>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="Photo URL"
                     class="input input-bordered"
                     name='img'
