@@ -13,7 +13,6 @@ const useAdmin = (user) => {
         .then((res) => res.json())
         .then((admin) => {
             setAdmin(admin.isAdmin)
-            console.log(admin);
         });
     }
   }, [user]);

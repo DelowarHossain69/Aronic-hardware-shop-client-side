@@ -52,15 +52,42 @@ const ManageOrders = () => {
 
     if (id && status === "shipped") {
       updateStatus({ status: "Shipped" });
-    } 
-    else if (id && status === "delivered") {
+    } else if (id && status === "delivered") {
       updateStatus({ status: "Delivered" });
-    } 
-    else if (id && status === "pending") {
+    } else if (id && status === "pending") {
       updateStatus({ status: "Pending" });
-    } 
-    else if (id && status === "cancel") {
-      console.log(id, status);
+    } else if (id && status === "cancel") {
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, cancel it!",
+      }).then((result) => {
+
+        if (result.isConfirmed) {
+
+          //   Action database
+          const deleteURL = `http://localhost:5000/orderCancel?email=${user?.email}&id=${id}`;
+          fetch(deleteURL, {
+            method: "DELETE",
+            headers: {
+              auth: `Bearer ${localStorage.getItem("accessToken")}`,
+            },
+          })
+            .then((res) => res.json())
+            .then((deleted) => {
+
+                if(deleted?.deletedCount > 0){
+                    Swal.fire("Cancel!", "The order has been deleted.", "success");
+                    refetch();
+                }
+            });
+        }
+      });
     }
   }
 

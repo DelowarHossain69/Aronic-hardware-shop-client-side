@@ -4,7 +4,7 @@ import auth from "../../../firebase.init";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loading from "../../shared/Loading/Loading";
 import useDeleteOrder from './../../../hooks/useDeleteOrder';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content'
 const MySwal = withReactContent(Swal)
@@ -12,9 +12,9 @@ const MySwal = withReactContent(Swal)
 
 
 const Orders = () => {
+  const navigate = useNavigate();
   const [user, loading] = useAuthState(auth);
   const [deleteOrder, setDeleteOrder] = useState({});
-
   const [deleted] = useDeleteOrder(deleteOrder); 
 
   
@@ -106,7 +106,7 @@ const Orders = () => {
                       <>
                         <button
                           className="btn btn-sm"
-                          disabled={orders?.status === "cancel"}
+                          onClick={()=> navigate(`payment/${order?._id}`)}
                         >Pay </button>
 
                         <button  class="btn btn-sm ml-2 bg-red-500 modal-button" onClick={()=> handleDeleteOrder(order)}>Cancel</button>

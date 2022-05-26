@@ -25,6 +25,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from './firebase.init';
 import Loading from './components/shared/Loading/Loading';
 import UpdateProduct from './components/pages/Dashboard/Admin/UpdateProduct';
+import Payment from './components/pages/Dashboard/Payment';
 
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
               <Route path='addReview' element={<AddReviews />} />
               <Route path='profile' element={<Profile />} />
               <Route path='profile' element={<Profile />} />
+              <Route path='payment/:id' element={<Payment />} />
 
               {isAdmin && <Route index element={
                 <RequireAdmin>

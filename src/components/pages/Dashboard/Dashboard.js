@@ -10,7 +10,7 @@ import Loading from "../../shared/Loading/Loading";
 const Dashboard = () => {
   const [user, loading] = useAuthState(auth);
   const [isAdmin] = useAdmin(user);
-  console.log('admin ', isAdmin);
+
   if (loading) {
     return <Loading />;
   }
