@@ -3,11 +3,17 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "./../../../../firebase.init";
 import { useQuery } from "react-query";
 import Loading from "../../../shared/Loading/Loading";
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const ManageOrders = () => {
   const [user, loading] = useAuthState(auth);
 
-  const { data: orders, isLoading } = useQuery(["manageAllOrders", user], () =>
+  const {
+    data: orders,
+    isLoading,
+    refetch,
+  } = useQuery(["manageAllOrders", user], () =>
     fetch(`http://localhost:5000/manageOrders?email=${user?.email}`, {
       headers: {
         auth: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -15,8 +21,47 @@ const ManageOrders = () => {
     }).then((res) => res.json())
   );
 
-  function handelOrders(id) {
-    
+  function handelOrders(e, id) {
+    const status = e.target.value;
+
+    // update status
+    const updateStatus = (updatedData) => {
+      const url = `http://localhost:5000/updateOrder?email=${user?.email}&id=${id}`;
+      fetch(url, {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+          auth: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+        body: JSON.stringify(updatedData),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          if (result?.modifiedCount > 0) {
+            Swal.fire({
+              position: "top",
+              icon: "success",
+              title: "The status has been saved",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            refetch();
+          }
+        });
+    };
+
+    if (id && status === "shipped") {
+      updateStatus({ status: "Shipped" });
+    } 
+    else if (id && status === "delivered") {
+      updateStatus({ status: "Delivered" });
+    } 
+    else if (id && status === "pending") {
+      updateStatus({ status: "Pending" });
+    } 
+    else if (id && status === "cancel") {
+      console.log(id, status);
+    }
   }
 
   if (loading || isLoading) {
@@ -58,13 +103,35 @@ const ManageOrders = () => {
                 <td>{order?.paid ? "Paid" : "Unpaid"}</td>
                 <td>{order?.status}</td>
                 <td>
-                  <select class="select select-bordered w-full max-w-xs" onChange={handelOrders}>
+                  <select
+                    class="select select-bordered w-full max-w-xs"
+                    onChange={(e) => handelOrders(e, order._id)}
+                  >
                     <option disabled selected>
                       Action
                     </option>
-                    <option value='shipped'>Shipped</option>
-                    <option value='delivered'>Delivered</option>
-                    <option value='cancel' disabled={order?.paid}>Cancel</option>
+
+                    <option
+                      value="shipped"
+                      disabled={order?.status === "Shipped"}
+                    >
+                      Shipped
+                    </option>
+
+                    <option
+                      value="pending"
+                      disabled={order?.status === "Pending"}
+                    >
+                      Pending
+                    </option>
+
+                    <option value="delivered" disabled={!order?.paid}>
+                      Delivered {!order?.paid && "(unpaid)"}
+                    </option>
+
+                    <option value="cancel" disabled={order?.paid}>
+                      Cancel {order?.paid && "(paid)"}
+                    </option>
                   </select>
                 </td>
               </tr>
