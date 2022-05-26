@@ -20,9 +20,19 @@ import RequireAdmin from './components/shared/Require/RequireAdmin';
 import AddProduct from './components/pages/Dashboard/Admin/AddProduct';
 import ManageProduct from './components/pages/Dashboard/Admin/ManageProduct';
 import ManageOrders from './components/pages/Dashboard/Admin/ManageOrders';
+import useAdmin from './hooks/useAdmin';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from './firebase.init';
+import Loading from './components/shared/Loading/Loading';
 
 
 function App() {
+  const [user, loading] = useAuthState(auth);
+  const [isAdmin] = useAdmin(user);
+
+  if(loading){
+    return <Loading />
+  }
   return (
     <div className=" max-w-7xl mx-auto">
       <Navbar />
@@ -45,11 +55,17 @@ function App() {
                   <Dashboard />
               </RequireAuth>
             }>
-              <Route index element={<Orders />} />
+              {!isAdmin && <Route index element={<Orders />} />}
               <Route path='addReview' element={<AddReviews />} />
               <Route path='profile' element={<Profile />} />
               <Route path='profile' element={<Profile />} />
 
+              {isAdmin && <Route index element={
+                <RequireAdmin>
+                  <ManageOrders />
+                </RequireAdmin>
+              } />}
+              
               <Route path='users' element={
                 <RequireAdmin>
                   <Users />
@@ -68,11 +84,6 @@ function App() {
                 </RequireAdmin>
               } />
 
-              <Route path='manageOrders' element={
-                <RequireAdmin>
-                  <ManageOrders />
-                </RequireAdmin>
-              } />
             </Route>
 
       </Routes>
