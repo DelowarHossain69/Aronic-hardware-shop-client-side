@@ -73,7 +73,7 @@ const Purchese = () => {
   if (loading) {
     return <Loading />;
   }
-
+  console.log(quantity)
   return (
     <section className="grid grid-cols-1 lg:grid-cols-5 my-24 rounded space-x-8 space-y-8">
       <div className="col-span-3">
