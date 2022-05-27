@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const ProductCart = ({product}) => {
     const {name, price, description, img, maxQuantity, minQuantity, _id} = product;
   return (
-    <div class="card bg-base-100 shadow-xl">
+    <div class="card bg-base-100 shadow-xl md:hover:translate-y-[-10px] transition-all duration-500 hover:translate-y-0">
       <figure class="px-5 pt-10">
         <img
           src={img}
@@ -25,7 +25,7 @@ const ProductCart = ({product}) => {
         </p>
         <div class="card-actions mt-3">
             <Link to={`/purchese/${_id}`} className="block w-full">
-              <button class="btn btn-secondary w-full text-lg">Place order</button>
+              <button class="btn btn-secondary w-full text-lg hover:bg-transparent hover:text-secondary">Place order</button>
             </Link>
         </div>
       </div>
