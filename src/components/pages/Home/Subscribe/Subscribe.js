@@ -17,7 +17,7 @@ const Subscribe = () => {
     }
   return (
     <section className="py-12 bg-secondary my-12 rounded-lg flex items-center justify-center">
-      <div className="w-full md:w-96 relative">
+      <div className="w-full lg:w-3/6 relative px-10 mx-auto">
         <form action="" onSubmit={handleSubscribe}>
           <input
             type="email"

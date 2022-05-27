@@ -1,25 +1,47 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const Contact = () => {
+  const handleContact = e => {
+    e.preventDefault();
+    const email = e.target.email.value;
+
+    if(email){
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Your Information has been submitted',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    }
+
+  }
   return (
     <section className="my-12">
       <h2 className="font-bold text-center mb-10 text-3xl">CONTACT US</h2>
       <div className="flex flex-col-reverse lg:flex-row items-stretch">
         <div className="flex-1">
-          <form action="" className="bg-white p-5 rounded-lg space-y-5">
+          <form action="" className="bg-white p-5 rounded-lg space-y-5" onSubmit={handleContact}>
             <input
               type="Name"
               placeholder="Enter your name"
               class="input input-bordered w-full"
+              name='name'
+              required
             />
             <input
               type="email"
               placeholder="Enter your email"
               class="input input-bordered w-full"
+              name='email'
+              required
             />
             <textarea
               class="textarea textarea-bordered w-full"
               placeholder="Your message"
+              name='message'
+              required
             ></textarea>
 
             <div className="text-center">
