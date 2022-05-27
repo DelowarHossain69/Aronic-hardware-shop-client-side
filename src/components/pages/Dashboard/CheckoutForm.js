@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Swal from "sweetalert2";
 import auth from "./../../../firebase.init";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import Loading from "../../shared/Loading/Loading";
 
 const CheckoutForm = ({ product }) => {
   const [user, loading] = useAuthState(auth);
@@ -11,22 +14,28 @@ const CheckoutForm = ({ product }) => {
   const elements = useElements();
   const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
+  const navigate = useNavigate();
+  const [paymentLoading, setLoading] = useState(false);
 
   useEffect(() => {
     if (price) {
-      fetch("http://localhost:5000/create-payment-intent", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({ price }),
-      })
+      fetch(
+        `http://localhost:5000/create-payment-intent?email=${user?.email}`,
+        {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            auth: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+          body: JSON.stringify({ price }),
+        }
+      )
         .then((res) => res.json())
         .then((data) => {
           setClientSecret(data.clientSecret);
         });
     }
-  }, [price]);
+  }, [price, user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,6 +60,9 @@ const CheckoutForm = ({ product }) => {
       setCardError("");
     }
 
+    if(loading || paymentLoading){
+      return <Loading />
+    }
     // confirm card payment
     const { paymentIntent, error: intentError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -67,6 +79,7 @@ const CheckoutForm = ({ product }) => {
       setCardError(intentError?.message);
     } else {
       setCardError("");
+      setLoading(true);
 
       // update data in database
       const transactionInfo = {
@@ -88,8 +101,10 @@ const CheckoutForm = ({ product }) => {
             Swal.fire(
               "Your payment has been completed.",
               `Transaction id : ${paymentIntent?.id}`,
-              "question"
+              "success"
             );
+
+            setLoading(false);
           }
         });
     }

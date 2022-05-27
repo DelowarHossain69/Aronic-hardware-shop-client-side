@@ -31,7 +31,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div class="navbar bg-slate-100 px-2 sticky top-0">
+    <div class="navbar bg-slate-100 px-2">
       <div class="navbar-start">
         <div class="dropdown">
           <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -67,31 +67,43 @@ const Navbar = () => {
           <ul class="menu menu-horizontal p-0 uppercase">{menus}</ul>
         </div>
 
-        {user && <div class="dropdown dropdown-end">
-          <label tabindex="1" class="btn btn-ghost btn-circle avatar">
-            <div class="w-10 rounded-full">
-              {
-                <img src={user?.photoURL} alt="user" className=" bg-gray-400"/>
-              }
-            </div>
-          </label>
-          <ul
-            tabindex="0"
-            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <img src={user?.photoURL} className=" w-24 mx-auto bg-slate-400 rounded-full mb-2" alt="" />
-            <h3 className="text-center font-bold mb-3">{user?.displayName}</h3>
-            <li>
-              <Link to="/dashboard">Dashboard</Link>
-            </li>
-            <li>
-            <Link to="/products">All products</Link>
-            </li>
-            <li>
-            <button onClick={()=> signOut(auth)}>Log out</button>
-            </li>
-          </ul>
-        </div>}
+        {user && (
+          <div class="dropdown dropdown-end">
+            <label tabindex="1" class="btn btn-ghost btn-circle avatar">
+              <div class="w-10 rounded-full">
+                {
+                  <img
+                    src={user?.photoURL}
+                    alt="user"
+                    className=" bg-gray-400"
+                  />
+                }
+              </div>
+            </label>
+            <ul
+              tabindex="0"
+              class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <img
+                src={user?.photoURL}
+                className=" w-24 mx-auto bg-slate-400 rounded-full mb-2"
+                alt=""
+              />
+              <h3 className="text-center font-bold mb-3">
+                {user?.displayName}
+              </h3>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link to="/products">All products</Link>
+              </li>
+              <li>
+                <button onClick={() => signOut(auth)}>Log out</button>
+              </li>
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
