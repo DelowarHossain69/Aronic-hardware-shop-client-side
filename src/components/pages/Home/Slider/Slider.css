@@ -1,33 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Macondo&family=Poppins:ital,wght@0,200;0,400;0,500;0,600;0,700;0,900;1,300;1,700&display=swap');
 .custom-slider{
-    background-image: linear-gradient(rgba(179, 179, 10, 0.397), rgba(14, 14, 13, 0.301)), url('https://i.ibb.co/wKFPJwc/slider-1.webp');
+    background-image:  url('https://i.ibb.co/wKFPJwc/slider-1.webp');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     font-family: 'Poppins', sans-serif;
 }
 
-.custom-font {
-    font-family: 'Macondo', cursive;
-}
-
-.custom-btn:hover{
-    background-color: transparent;
-    color : black;
-}
-/* responsive */
-@media only screen and (max-width: 640px){
+/* Responsive */
+@media screen and (max-width: 640px) {
     .custom-slider{
-        background-image: linear-gradient(rgba(7, 7, 6, 0.749), rgba(14, 14, 13, 0.534)), url('https://i.ibb.co/wKFPJwc/slider-1.webp');
+        background-image: linear-gradient(rgba(0, 0, 0, 0.511),rgba(0, 0, 0, 0.511)), url('https://i.ibb.co/wKFPJwc/slider-1.webp');
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;
         font-family: 'Poppins', sans-serif;
-        color: wheat;
-    }
-    .custom-btn:hover{
-        background-color: transparent;
-        color : white;
-        border-color: white;
-    }
+    } 
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 const BestOffer = () => {
   return (
@@ -8,17 +9,17 @@ const BestOffer = () => {
           <div className="flex-1 flex justify-center">
           <img
             src="https://i.ibb.co/F4wVYqT/offer.webp"
-            class="max-w-sm rounded-lg shadow-2xl" alt=""
+            class="rounded-lg " alt=""
           />
           </div>
           <div className="flex-1">
-            <h1 class="text-5xl font-bold">Best Offer Today</h1>
+            <h1 class="text-5xl font-bold">We Make All kind Of Power Tools</h1>
             <p class="py-6">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+            A power tool is a tool that is actuated by an additional power source and mechanism other than the solely manual labor used with hand tools. The most common types of power tools use electric motors. Internal combustion engines and compressed air are also commonly used.
             </p>
-            <button class="btn btn-primary">Get Started</button>
+            <Link to='/products'>
+            <button class="btn btn-secondary">Our Products</button>
+            </Link>
           </div>
         </div>
       </div>
