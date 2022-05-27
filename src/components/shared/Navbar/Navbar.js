@@ -18,6 +18,9 @@ const Navbar = () => {
         <Link to="/products">Products</Link>
       </li>
       <li>
+        <Link to="/protfolio">Protfolio</Link>
+      </li>
+      <li>
         <Link to="/blog">Blog</Link>
       </li>
       {!user && (
@@ -28,7 +31,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div class="navbar bg-slate-100 px-2">
+    <div class="navbar bg-slate-100 px-2 sticky top-0">
       <div class="navbar-start">
         <div class="dropdown">
           <label tabindex="0" class="btn btn-ghost lg:hidden">

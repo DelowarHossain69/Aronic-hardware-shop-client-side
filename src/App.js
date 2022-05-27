@@ -26,8 +26,9 @@ import auth from "./firebase.init";
 import Loading from "./components/shared/Loading/Loading";
 import UpdateProduct from "./components/pages/Dashboard/Admin/UpdateProduct";
 import Payment from "./components/pages/Dashboard/Payment";
-import Error from "./components/Error/Error";
+import Error from "./components/pages/Error/Error";
 import Blog from './components/pages/Blog/Blog';
+import MyProtfolio from './components/pages/MyProtfolio/MyProtfolio';
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -48,6 +49,7 @@ function App() {
           <Route path="/forget-password" element={<ForgetPassword />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/blog" element={<Blog />}></Route>
+          <Route path="/protfolio" element={<MyProtfolio />}></Route>
 
           <Route
             path="/purchese/:id"
