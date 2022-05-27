@@ -27,6 +27,7 @@ import Loading from "./components/shared/Loading/Loading";
 import UpdateProduct from "./components/pages/Dashboard/Admin/UpdateProduct";
 import Payment from "./components/pages/Dashboard/Payment";
 import Error from "./components/Error/Error";
+import Blog from './components/pages/Blog/Blog';
 
 function App() {
   const [user, loading] = useAuthState(auth);
@@ -46,6 +47,7 @@ function App() {
           <Route path="/login" element={<Login />}></Route>
           <Route path="/forget-password" element={<ForgetPassword />}></Route>
           <Route path="/register" element={<Register />}></Route>
+          <Route path="/blog" element={<Blog />}></Route>
 
           <Route
             path="/purchese/:id"
