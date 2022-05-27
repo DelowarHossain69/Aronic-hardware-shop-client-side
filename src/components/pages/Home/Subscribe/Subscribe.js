@@ -23,7 +23,7 @@ const Subscribe = () => {
             type="email"
             name='email'
             placeholder="Enter your email"
-            class="input input-bordered w-full rounded-full"
+            className="input input-bordered w-full rounded-full"
             required
           />
           <button className="btn btn-primary absolute to-0 right-0 rounded-full">

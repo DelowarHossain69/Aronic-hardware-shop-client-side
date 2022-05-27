@@ -45,17 +45,17 @@ const AddProduct = () => {
             <form action="" className='w-full md:w-3/6 mx-auto  space-y-4 shadow-xl p-5 rounded' onSubmit={handleForm}>
                 <h2 className='text-2xl text-center mb-4'>Add new Product</h2>
 
-                <input type="text" name="name" placeholder="Product name" class="input input-bordered w-full" required/>
+                <input type="text" name="name" placeholder="Product name" className="input input-bordered w-full" required/>
 
-                <input type="number" name="price" placeholder="Price" class="input input-bordered w-full" required />
+                <input type="number" name="price" placeholder="Price" className="input input-bordered w-full" required />
 
-                <input type="number" name='maxQuantity' placeholder="Available quantity" class="input input-bordered w-full" required/>
+                <input type="number" name='maxQuantity' placeholder="Available quantity" className="input input-bordered w-full" required/>
 
-                <input type="number" name='minQuantity' placeholder="Minimum orders" class="input input-bordered w-full" required />
+                <input type="number" name='minQuantity' placeholder="Minimum orders" className="input input-bordered w-full" required />
 
-                <input type="text" name="img" placeholder="Product image" class="input input-bordered w-full" required/>
+                <input type="text" name="img" placeholder="Product image" className="input input-bordered w-full" required/>
 
-                <textarea class="textarea textarea-bordered w-full" placeholder="Description" name='description' required></textarea>
+                <textarea className="textarea textarea-bordered w-full" placeholder="Description" name='description' required></textarea>
 
                 <button className='btn btn-secondary w-full'>Add Product</button>
             </form>

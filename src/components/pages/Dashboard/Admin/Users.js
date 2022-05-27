@@ -23,8 +23,6 @@ const Users = () => {
     }).then((res) => res.json())
   );
 
-  console.log(users);
-
   const handleAdmin = async (info, e) => {
     console.log(e.target.value);
 
@@ -105,8 +103,8 @@ const Users = () => {
     <section>
       <h2 className="text-2xl mb-3">All user</h2>
 
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           <thead>
             <tr>
               <th>No.</th>
@@ -134,7 +132,7 @@ const Users = () => {
 
                 <td>
                   <select
-                    class="select select-bordered w-28"
+                    className="select select-bordered w-28"
                     onChange={(e) => handleAdmin(info, e)}
                   >
                     <option disabled selected>

@@ -29,18 +29,18 @@ const DeleteModal = ({ order, refetch, setDeleteOrder, user}) => {
     <div>
       
 
-      <input type="checkbox" id="deleteOrder" class="modal-toggle" />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">
+      <input type="checkbox" id="deleteOrder" className="modal-toggle" />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
             {productName}
           </h3>
 
-          <div class="modal-action">
-            <label for="deleteOrder" class="btn" onClick={handleCancelOrder}>
+          <div className="modal-action">
+            <label htmlFor="deleteOrder" className="btn" onClick={handleCancelOrder}>
               Delete
             </label>
-            <label for="deleteOrder" class="btn">
+            <label htmlFor="deleteOrder" className="btn">
                 Cancel
             </label>
           </div>

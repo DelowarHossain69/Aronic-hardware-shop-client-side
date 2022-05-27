@@ -55,7 +55,7 @@ const Orders = () => {
       confirmButtonText: 'Delete',
       confirmButtonAriaLabel: 'Thumbs up, great!',
       cancelButtonText:
-        '<i class="fa fa-thumbs-down">Cancel</i>',
+        '<i className="fa fa-thumbs-down">Cancel</i>',
       cancelButtonAriaLabel: 'Thumbs down'
     })
     .then(res => {
@@ -69,8 +69,8 @@ const Orders = () => {
   return (
     <section>
       {orders?.length > 0 && (
-        <div class="overflow-x-auto">
-          <table class="table w-full text-center">
+        <div className="overflow-x-auto">
+          <table className="table w-full text-center">
             <thead>
               <tr>
                 <th>#No.</th>
@@ -113,7 +113,7 @@ const Orders = () => {
                           onClick={()=> navigate(`payment/${order?._id}`)}
                         >Pay </button>
 
-                        <button  class="btn btn-sm ml-2 bg-red-500 modal-button" onClick={()=> handleDeleteOrder(order)}>Cancel</button>
+                        <button  className="btn btn-sm ml-2 bg-red-500 modal-button" onClick={()=> handleDeleteOrder(order)}>Cancel</button>
                       </>
                     )}
                   </td>

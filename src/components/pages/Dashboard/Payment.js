@@ -32,18 +32,18 @@ const Payment = () => {
 
   return (
     <section className="">
-      <div class="card bg-base-100 shadow-xl w-fit ">
+      <div className="card bg-base-100 shadow-xl w-fit ">
         <figure>
           <img src={product?.productImg} alt={product?.productName} className='h-96' />
         </figure>
-        <div class="card-body">
-          <h2 class="card-title">{product?.productName}</h2>
+        <div className="card-body">
+          <h2 className="card-title">{product?.productName}</h2>
           <h2>Price : ${product?.price}</h2>
           <h2>Quantity : {product?.quantity}</h2>
         </div>
       </div>
 
-      <div class="card bg-base-100 shadow-xl rounded w-96 mt-6 p-4">
+      <div className="card bg-base-100 shadow-xl rounded w-96 mt-6 p-4">
         <h2 className="text-xl mb-5 text-center font-bold">Please Payment</h2>
         <div className="">
           <Elements stripe={stripePromise}>

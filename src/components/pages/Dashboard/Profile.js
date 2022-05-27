@@ -250,7 +250,7 @@ const Profile = () => {
                 <input
                   type="text"
                   placeholder="Your name"
-                  class=" w-full border-0 border-b-2 outline-0 py-2"
+                  className=" w-full border-0 border-b-2 outline-0 py-2"
                   disabled={isDisabold}
                   name="name"
                 />
@@ -258,13 +258,13 @@ const Profile = () => {
               <input
                 type="email"
                 value={`Email: ${user?.email}`}
-                class=" w-full border-0 border-b-2 outline-0 py-4"
+                className=" w-full border-0 border-b-2 outline-0 py-4"
                 disabled
               />
 
               <input
                 type="number"
-                class=" w-full border-0 border-b-2 outline-0 py-4"
+                className=" w-full border-0 border-b-2 outline-0 py-4"
                 placeholder="Enter your phone number"
                 min="0"
                 disabled={isDisabold}
@@ -273,7 +273,7 @@ const Profile = () => {
 
               <input
                 type="text"
-                class=" w-full border-0 border-b-2 outline-0 py-4"
+                className=" w-full border-0 border-b-2 outline-0 py-4"
                 placeholder="Education"
                 disabled={isDisabold}
                 name="education"
@@ -294,7 +294,7 @@ const Profile = () => {
                   name="gender"
                   value="Male"
                   id="gender"
-                  class="radio mr-2"
+                  className="radio mr-2"
                   disabled={isDisabold}
                 />
                 <label htmlFor="gender" className="mr-5">
@@ -306,7 +306,7 @@ const Profile = () => {
                   name="gender"
                   id="Female"
                   value="female"
-                  class="radio mr-2"
+                  className="radio mr-2"
                   disabled={isDisabold}
                 />
                 <label htmlFor="female">Female</label>

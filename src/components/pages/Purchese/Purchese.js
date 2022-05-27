@@ -73,25 +73,25 @@ const Purchese = () => {
   if (loading) {
     return <Loading />;
   }
-  console.log(quantity)
+
   return (
     <section className="grid grid-cols-1 lg:grid-cols-5 my-24 rounded space-x-8 space-y-8">
       <div className="col-span-3">
-        <div class="hero min-h-screen bg-[#dddddd29] rounded shadow-xl">
-          <div class="hero-content flex-col lg:flex-row space-x-5 items-start">
+        <div className="hero min-h-screen bg-[#dddddd29] rounded shadow-xl">
+          <div className="hero-content flex-col lg:flex-row space-x-5 items-start">
             <div className="lg:w-1/2">
-              <img src={img} class="max-w-full rounded-lg " alt="product pic" />
+              <img src={img} className="max-w-full rounded-lg " alt="product pic" />
             </div>
             <div className="lg:w-1/2 space-y-5">
-              <h1 class="text-3xl mt-8 lg:mt-0">{name}</h1>
-              <h2 class="text-2xl font-bold">
+              <h1 className="text-3xl mt-8 lg:mt-0">{name}</h1>
+              <h2 className="text-2xl font-bold">
                 Price : ${price}
                 <strong className="text-[#cb7e26]"> /peace</strong>
               </h2>
-              <h2 class="text-xl ">
+              <h2 className="text-xl ">
                 Available quantity : <strong>{maxQuantity} peace</strong>
               </h2>
-              <h2 class="text-xl">
+              <h2 className="text-xl">
                 Min order quantity : <strong>{minQuantity} peace</strong>
               </h2>
 
@@ -128,65 +128,65 @@ const Purchese = () => {
           onSubmit={handlePlaceOrder}
         >
           <h2 className="text-xl mb-3 font-bold">Shipping & Billing</h2>
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text  text-lg">Your name</span>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text  text-lg">Your name</span>
             </label>
             <input
               type="text"
-              class="input input-bordered w-full text-lg"
+              className="input input-bordered w-full text-lg"
               value={user?.displayName}
               disabled
             />
           </div>
 
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text  text-lg">Your Email</span>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text  text-lg">Your Email</span>
             </label>
             <input
               type="text"
-              class="input input-bordered w-full text-lg"
+              className="input input-bordered w-full text-lg"
               value={user?.email}
               disabled
             />
           </div>
 
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text  text-lg">Product Quantity</span>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text  text-lg">Product Quantity</span>
             </label>
             <input
               type="number"
               placeholder="Product quantity"
-              class="input input-bordered w-full text-lg"
+              className="input input-bordered w-full text-lg"
               onChange={(e) => setQuantity(e.target.value)}
               min={minQuantity}
               max={maxQuantity}
             />
           </div>
 
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text  text-lg">Phone*</span>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text  text-lg">Phone*</span>
             </label>
             <input
               type="number"
               name="phone"
               placeholder="Phone"
-              class="input input-bordered w-full text-lg"
+              className="input input-bordered w-full text-lg"
               required
             />
           </div>
 
-          <div class="form-control w-full">
-            <label class="label">
-              <span class="label-text  text-lg">Shipping address*</span>
+          <div className="form-control w-full">
+            <label className="label">
+              <span className="label-text  text-lg">Shipping address*</span>
             </label>
             <input
               type="text"
               name="shippingAddress"
-              class="input input-bordered w-full text-lg"
+              className="input input-bordered w-full text-lg"
               required
               placeholder="Your address"
             />

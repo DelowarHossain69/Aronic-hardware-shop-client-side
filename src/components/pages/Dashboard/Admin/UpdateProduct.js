@@ -66,12 +66,12 @@ const UpdateProduct = () => {
 
   return (
     <section>
-      <div class="hero py-5 bg-base-200 px-5">
-        <div class="hero-content flex-col lg:flex-row-reverse items-start justify-between w-full">
-          <div class="text-center lg:text-left flex-1">
+      <div className="hero py-5 bg-base-200 px-5">
+        <div className="hero-content flex-col lg:flex-row-reverse items-start justify-between w-full">
+          <div className="text-center lg:text-left flex-1">
             <div className="bg-white w-fit p-3 rounded">
               <img src={product?.img} className="rounded mb-2" alt="" />
-              <h1 class="text-2xl font-bold mb-2">{product?.name}</h1>
+              <h1 className="text-2xl font-bold mb-2">{product?.name}</h1>
               <h3 className="text-xl font-semibold mb-1">
                 Price : {product?.price}
               </h3>
@@ -81,87 +81,87 @@ const UpdateProduct = () => {
               <h3 className="text-xl font-semibold">
                 Minimum order quantity : {product?.minQuantity}
               </h3>
-              <p class="py-6">{product?.description}</p>
+              <p className="py-6">{product?.description}</p>
             </div>
           </div>
-          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 flex-1">
+          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 flex-1">
             <form action="" onSubmit={handleUpdate}>
                 <h2 className="text-center font-bold text-2xl mt-3">Update Product</h2>
-              <div class="card-body">
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Product Name</span>
+              <div className="card-body">
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Product Name</span>
                   </label>
                   <input
                     type="text"
                     placeholder="Product name "
-                    class="input input-bordered"
+                    className="input input-bordered"
                     name='name'
                   />
                 </div>
 
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Price</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Price</span>
                   </label>
                   <input
                     type="number"
                     placeholder="Price"
-                    class="input input-bordered"
+                    className="input input-bordered"
                     name='price'
                     min='0'
                   />
                 </div>
 
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Available quantity</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Available quantity</span>
                   </label>
                   <input
                     type="number"
                     placeholder="Available quantity"
-                    class="input input-bordered"
+                    className="input input-bordered"
                     name='maxQuantity'
                     min='0'
                     onChange={(e)=> setAvailableQuantity(e.target.value)}
                   />
                 </div>
 
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Minimum order</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Minimum order</span>
                   </label>
                   <input
                     type="number"
                     placeholder="Minimum order"
-                    class="input input-bordered"
+                    className="input input-bordered"
                     name='minQuantity'
                     max={availableQuantity}
                   />
                 </div>
 
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Photo URL</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Photo URL</span>
                   </label>
                   <input
                     type="text"
                     placeholder="Photo URL"
-                    class="input input-bordered"
+                    className="input input-bordered"
                     name='img'
                   />
                 </div>
 
-                <div class="form-control">
-                  <label class="label">
-                    <span class="label-text">Description</span>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Description</span>
                   </label>
-                  <textarea class="textarea textarea-bordered w-full" placeholder="Description" name='description'></textarea>
+                  <textarea className="textarea textarea-bordered w-full" placeholder="Description" name='description'></textarea>
                 </div>
 
 
-                <div class="form-control mt-6">
-                  <button class="btn btn-secondary">Update</button>
+                <div className="form-control mt-6">
+                  <button className="btn btn-secondary">Update</button>
                 </div>
               </div>
             </form>

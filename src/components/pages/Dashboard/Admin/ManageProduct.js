@@ -66,8 +66,8 @@ const ManageProduct = () => {
 
   return (
     <section>
-      <div class="overflow-x-auto">
-        <table class="table w-full text-center">
+      <div className="overflow-x-auto">
+        <table className="table w-full text-center">
           <thead>
             <tr>
               <th>No.</th>
@@ -94,7 +94,7 @@ const ManageProduct = () => {
                 <td>{product?.maxQuantity}</td>
                 <td>
                   <select
-                    class="select select-bordered w-18"
+                    className="select select-bordered w-18"
                     onChange={(e) => handleProduct(e, product)}
                   >
                     <option disabled selected>

@@ -67,25 +67,25 @@ const AddReviews = () => {
         <form action="" onSubmit={handleComment}>
             
           <textarea
-            class="textarea textarea-bordered w-full h-28 my-4 text-lg"
+            className="textarea textarea-bordered w-full h-28 my-4 text-lg"
             name='comment'
             placeholder="Your comment"
             maxLength="250"
            autoFocus required></textarea>
 
             <h2 className="mb-3 font-bold text-lg">Double click to add ratings ({ratingCount} star)</h2>
-          <div class="rating space-x-2">
+          <div className="rating space-x-2">
           
             <input
               type="radio"
               name="rating"
-              class="mask mask-star-2 bg-orange-400"
+              className="mask mask-star-2 bg-orange-400"
               onClick={()=> setRatingCount(1)}
             />
             <input
               type="radio"
               name="rating"
-              class="mask mask-star-2 bg-orange-400"
+              className="mask mask-star-2 bg-orange-400"
               checked
               onClick={()=> setRatingCount(2)}
               
@@ -93,19 +93,19 @@ const AddReviews = () => {
             <input
               type="radio"
               name="rating"
-              class="mask mask-star-2 bg-orange-400"
+              className="mask mask-star-2 bg-orange-400"
               onClick={()=> setRatingCount(3)}
             />
             <input
               type="radio"
               name="rating"
-              class="mask mask-star-2 bg-orange-400"
+              className="mask mask-star-2 bg-orange-400"
               onClick={()=> setRatingCount(4)}
             />
             <input
               type="radio"
               name="rating"
-              class="mask mask-star-2 bg-orange-400"
+              className="mask mask-star-2 bg-orange-400"
               onClick={()=> setRatingCount(5)}
             />
 

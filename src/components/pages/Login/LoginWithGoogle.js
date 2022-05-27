@@ -23,7 +23,7 @@ const LoginWithGoogle = () => {
 }
   return (
     <div>
-      <div class="divider">OR</div>
+      <div className="divider">OR</div>
       <button className="btn bg-[#ddd] hover:bg-[#bab3b3] text-black w-full border-0" onClick={()=> signInWithGoogle()}>
         <img
           src="https://i.ibb.co/5xfQpxz/google.png"

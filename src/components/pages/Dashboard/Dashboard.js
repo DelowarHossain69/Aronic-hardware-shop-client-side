@@ -18,7 +18,7 @@ const Dashboard = () => {
   return (
     <section className="my-12">
       <div className="flex items-center ml-7">
-        <label for="dashboard-sideBar" class="drawer-button lg:hidden">
+        <label htmlFor="dashboard-sideBar" className="drawer-button lg:hidden">
           <FontAwesomeIcon
             icon={faLineChart}
             className=" py-1 btn btn-xs rounded"
@@ -28,14 +28,14 @@ const Dashboard = () => {
         <h2 className="ml-2 text-2xl font-bold">Your Dashboard</h2>
       </div>
 
-      <div class="drawer drawer-mobile">
-        <input id="dashboard-sideBar" type="checkbox" class="drawer-toggle" />
-        <div class="drawer-content">
+      <div className="drawer drawer-mobile">
+        <input id="dashboard-sideBar" type="checkbox" className="drawer-toggle" />
+        <div className="drawer-content">
           <Outlet />
         </div>
-        <div class="drawer-side">
-          <label for="dashboard-sideBar" class="drawer-overlay"></label>
-          <ul class="menu p-4  w-80 bg-base-100 text-base-content">
+        <div className="drawer-side">
+          <label htmlFor="dashboard-sideBar" className="drawer-overlay"></label>
+          <ul className="menu p-4  w-80 bg-base-100 text-base-content">
             {isAdmin && (
               <>
                 <li>
