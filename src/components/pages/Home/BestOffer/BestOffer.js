@@ -13,7 +13,7 @@ const BestOffer = () => {
           />
           </div>
           <div className="flex-1 text-center lg:text-left">
-            <h1 class="text-5xl font-bold">We Make All kind Of Power Tools</h1>
+            <h1 class="text-5xl font-bold">We Make All kind Of Tools</h1>
             <p class="py-6">
             A power tool is a tool that is actuated by an additional power source and mechanism other than the solely manual labor used with hand tools. The most common types of power tools use electric motors. Internal combustion engines and compressed air are also commonly used.
             </p>

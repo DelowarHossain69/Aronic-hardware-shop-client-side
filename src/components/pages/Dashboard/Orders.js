@@ -101,9 +101,13 @@ const Orders = () => {
                   <td>${order?.price}</td>
                   <td>
                     {order?.paid ? (
-                      <span className=" text-green-500 italic">Paid</span>
+                      <>
+                        <h5 className=" text-green-500 italic font-bold text-lg">Paid</h5>
+                        <h5 className="font-semiBold ">{order?.transactionId}</h5>
+                      </>
                     ) : (
                       <>
+                          <h5 className="mb-2 italic text-red-500 font-bold">Unpaid</h5>
                         <button
                           className="btn btn-sm"
                           onClick={()=> navigate(`payment/${order?._id}`)}

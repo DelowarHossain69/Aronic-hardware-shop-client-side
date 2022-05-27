@@ -56,7 +56,7 @@ const Dashboard = () => {
             {!isAdmin && (
               <>
                 <li>
-                  <Link to="/dashboard/">Orders</Link>
+                  <Link to="/dashboard/">My orders</Link>
                 </li>
                 <li>
                   <Link to="/dashboard/addReview">Add review</Link>

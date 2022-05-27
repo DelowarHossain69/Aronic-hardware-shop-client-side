@@ -315,7 +315,7 @@ const Profile = () => {
 
             <div className="text-right">
               <button className="btn btn-secondary btn-sm mt-8">
-                Save
+                Save Changes
                 <FontAwesomeIcon icon={faCheck} className="ml-2" title="Save" />
               </button>
             </div>
