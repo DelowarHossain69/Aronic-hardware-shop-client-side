@@ -14,8 +14,8 @@ const Reviews = () => {
     )
 
   return (
-    <section className="my-12">
-      <h2 className="text-3xl text-center font-bold mb-6">Reviews</h2>
+    <section className="my-12 bg-white p-5">
+      <h2 className="text-2xl text-center font-bold mb-6 uppercase">Client Reviews</h2>
 
       <div>
       <Swiper
@@ -34,7 +34,7 @@ const Reviews = () => {
       >
         {
             reviews?.map(review => <SwiperSlide key={review._id}>
-                <div className="w-full md:w-1/2 mx-auto text-center py-10 shadow-xl p-5">
+                <div className="w-full md:w-1/2 mx-auto text-center py-10  p-5">
                     <div>
                         <img src={review?.img} alt="" className=" w-28 h-28 mx-auto rounded-full mb-2 border-2"/>
                     </div>
