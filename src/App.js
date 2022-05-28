@@ -39,7 +39,7 @@ function App() {
   }
   return (
     <section className=" bg-slate-100">
-      <div className=" max-w-7xl mx-auto">
+      <div className=" max-w-7xl mx-auto px-5 lg:px-0">
         <Navbar />
 
         <Routes>

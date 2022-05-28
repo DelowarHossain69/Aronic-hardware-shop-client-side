@@ -6,7 +6,7 @@ const DeleteModal = ({ order, refetch, setDeleteOrder, user}) => {
   const {productName,quantity, paid, status, price, productImg, _id} = order;
 
   const handleCancelOrder = () => {
-    fetch(`http://localhost:5000/order?email=${user?.email}&id=${_id}`, {
+    fetch(`https://protected-chamber-45180.herokuapp.com/order?email=${user?.email}&id=${_id}`, {
       method: "DELETE",
       headers: {
         auth: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -28,7 +28,7 @@ const AddReviews = () => {
     }
     console.log(ratingInfo)
 
-      fetch(`http://localhost:5000/rating?email=${user?.email}`, {
+      fetch(`https://protected-chamber-45180.herokuapp.com/rating?email=${user?.email}`, {
           method : 'POST',
           headers : {
               'content-type' : 'application/json',

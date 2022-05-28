@@ -5,7 +5,7 @@ import ProductCart from '../Home/Products/ProductCart';
 
 const Products = () => {
     const {data:products, isLoading} = useQuery('getAllData', ()=> 
-        fetch('http://localhost:5000/products')
+        fetch('https://protected-chamber-45180.herokuapp.com/products')
         .then(res => res.json())
     )
 

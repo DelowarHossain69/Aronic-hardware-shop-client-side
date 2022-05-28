@@ -35,7 +35,7 @@ const Login = () => {
 
   return (
     <section className="my-24">
-      <div className="card w-96 bg-base-100 shadow-xl mx-auto">
+      <div className="card w-full md:w-96 bg-base-100 shadow-xl mx-auto">
         <div className="card-body">
           <h2 className="text-3xl text-center font-bold mb-3">Login</h2>
           <form

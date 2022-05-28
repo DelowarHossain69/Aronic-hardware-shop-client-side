@@ -8,7 +8,7 @@ const useToken = (user) => {
    useEffect(()=>{
        
     if(image && name){
-        fetch('http://localhost:5000/user', {
+        fetch('https://protected-chamber-45180.herokuapp.com/user', {
         method : 'PUT',
         headers : {
             'content-type' : 'application/json'

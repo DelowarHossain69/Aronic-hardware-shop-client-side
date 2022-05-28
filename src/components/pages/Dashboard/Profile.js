@@ -27,7 +27,7 @@ const Profile = () => {
     isLoading,
     refetch,
   } = useQuery(["getProfile", user], () =>
-    fetch(`http://localhost:5000/user?email=${user?.email}`, {
+    fetch(`https://protected-chamber-45180.herokuapp.com/user?email=${user?.email}`, {
       headers: {
         auth: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -39,7 +39,7 @@ const Profile = () => {
     const photo = await MySwal.fire({
       title: "Your photo URL",
       input: "text",
-      inputLabel: "Your IP address",
+      inputLabel: "And click save changes button",
       showCancelButton: true,
       inputValidator: (value) => {
         if (!value) {
@@ -94,9 +94,9 @@ const Profile = () => {
         gitHub: githubLink || profileInfo?.socialMedia?.gitHub,
       },
     };
-    console.log(updatedInfo, updatedProfileImage)
+
     // update data in database
-    fetch(`http://localhost:5000/updateUser?email=${user?.email}`, {
+    fetch(`https://protected-chamber-45180.herokuapp.com/updateUser?email=${user?.email}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -132,6 +132,8 @@ const Profile = () => {
               alt=""
             />
             <h2 className=" font-bold text-xl">{user?.displayName}</h2>
+            <h2 className="text-xl">{user?.email}</h2>
+            <h2 className="text-xl">{profileInfo?.education}</h2>
             <h3 className="text-lg">
               Phone : {profileInfo?.phone || "0100000000"}
             </h3>

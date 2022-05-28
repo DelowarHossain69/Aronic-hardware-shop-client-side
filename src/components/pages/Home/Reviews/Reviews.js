@@ -9,7 +9,7 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 
 const Reviews = () => {
     const {data:reviews, isLoading} = useQuery('getReviews', ()=> 
-        fetch('http://localhost:5000/rating')
+        fetch('https://protected-chamber-45180.herokuapp.com/rating')
         .then(res => res.json())
     )
 

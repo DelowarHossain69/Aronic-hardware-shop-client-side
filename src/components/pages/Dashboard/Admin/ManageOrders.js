@@ -14,7 +14,7 @@ const ManageOrders = () => {
     isLoading,
     refetch,
   } = useQuery(["manageAllOrders", user], () =>
-    fetch(`http://localhost:5000/manageOrders?email=${user?.email}`, {
+    fetch(`https://protected-chamber-45180.herokuapp.com/manageOrders?email=${user?.email}`, {
       headers: {
         auth: `Bearer ${localStorage.getItem("accessToken")}`,
       },
@@ -26,7 +26,7 @@ const ManageOrders = () => {
 
     // update status
     const updateStatus = (updatedData) => {
-      const url = `http://localhost:5000/updateOrder?email=${user?.email}&id=${id}`;
+      const url = `https://protected-chamber-45180.herokuapp.com/updateOrder?email=${user?.email}&id=${id}`;
       fetch(url, {
         method: "PUT",
         headers: {
@@ -71,7 +71,7 @@ const ManageOrders = () => {
         if (result.isConfirmed) {
 
           //   Action database
-          const deleteURL = `http://localhost:5000/orderCancel?email=${user?.email}&id=${id}`;
+          const deleteURL = `https://protected-chamber-45180.herokuapp.com/orderCancel?email=${user?.email}&id=${id}`;
           fetch(deleteURL, {
             method: "DELETE",
             headers: {
@@ -140,7 +140,7 @@ const ManageOrders = () => {
 
                     <option
                       value="shipped"
-                      disabled={order?.status === "Shipped"}
+                      disabled={order?.status === "Shipped" || !order?.paid}
                     >
                       Shipped
                     </option>
@@ -149,7 +149,7 @@ const ManageOrders = () => {
                       value="pending"
                       disabled={order?.status === "Pending"}
                     >
-                      Pending
+                      {order?.status === "Pending" ? 'Pending (already)' : 'Pending'}
                     </option>
 
                     <option value="delivered" disabled={!order?.paid}>

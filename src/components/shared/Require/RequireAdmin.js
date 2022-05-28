@@ -8,19 +8,21 @@ import { signOut } from 'firebase/auth';
 
 const RequireAdmin = ({children}) => {
     const [user, loading] = useAuthState(auth);
-    const [isAdmin] = useAdmin(user);
+    const [isAdmin, adminLoading] = useAdmin(user);
 
-    if(loading){
+    if(loading || adminLoading){
         return <Loading />
     }
 
-    if(!user ){
+// If user not available
+    if(!user || !isAdmin){
+        
         // Sign out the user
         signOut(auth);
         // remove token
         localStorage.removeItem('accessToken');
 
-        // return <Navigate to="/login" />
+        return <Navigate to="/login" />
     }
 
     return children;

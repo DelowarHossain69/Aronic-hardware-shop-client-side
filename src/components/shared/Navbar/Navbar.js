@@ -18,7 +18,7 @@ const Navbar = () => {
         <Link to="/products">Products</Link>
       </li>
       <li>
-        <Link to="/protfolio">Protfolio</Link>
+        <Link to="/protfolio">Portfolio</Link>
       </li>
       <li>
         <Link to="/blog">Blog</Link>
@@ -66,7 +66,7 @@ const Navbar = () => {
         <div className="hidden lg:flex">
           <ul className="menu menu-horizontal p-0 uppercase">{menus}</ul>
         </div>
-
+    {/* When a user login  */}
         {user && (
           <div className="dropdown dropdown-end">
             <label tabIndex="1" className="btn btn-ghost btn-circle avatar">

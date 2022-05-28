@@ -18,7 +18,7 @@ const Payment = () => {
 
   const { data: product, isLoading } = useQuery(["purcheseProduct", id], () =>
     axios
-      .get(`http://localhost:5000/orderDetails?email=${user?.email}&id=${id}`, {
+      .get(`https://protected-chamber-45180.herokuapp.com/orderDetails?email=${user?.email}&id=${id}`, {
         headers: {
           auth: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -31,7 +31,7 @@ const Payment = () => {
   }
 
   return (
-    <section className="">
+    <section className="flex flex-col items-center mb-10">
       <div className="card bg-base-100 shadow-xl w-fit ">
         <figure>
           <img src={product?.productImg} alt={product?.productName} className='h-96' />
@@ -44,7 +44,7 @@ const Payment = () => {
       </div>
 
       <div className="card bg-base-100 shadow-xl rounded w-96 mt-6 p-4">
-        <h2 className="text-xl mb-5 text-center font-bold">Please Payment</h2>
+        <h2 className="text-xl mb-5 text-center font-bold">Please complete your Payment</h2>
         <div className="">
           <Elements stripe={stripePromise}>
             <CheckoutForm product={product} />

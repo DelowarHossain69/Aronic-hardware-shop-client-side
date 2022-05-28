@@ -25,7 +25,7 @@ const Dashboard = () => {
           />
         </label>
 
-        <h2 className="ml-2 text-2xl font-bold">Your Dashboard</h2>
+        <h2 className="ml-2 text-2xl font-bold hidden md:block">Your Dashboard</h2>
       </div>
 
       <div className="drawer drawer-mobile">

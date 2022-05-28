@@ -14,9 +14,26 @@ const Purchese = () => {
     product;
 
   const [quantity, setQuantity] = useState(minQuantity);
+  const [disaboldBtn, setDisabold] = useState(false);
 
+  const handleProductQuantity = e => {
+      const value = parseInt(e.target.value);
+      const minimumQuantity = parseInt(minQuantity);
+      const maximumQuantity = parseInt(maxQuantity);
+
+      setQuantity(value);
+
+      if(value >= minimumQuantity && value <= maximumQuantity){
+        setDisabold(false);
+      }
+      else{
+        setDisabold(true);
+        console.log('order is not ok');
+      }
+  }
+  
   useEffect(() => {
-    const url = `http://localhost:5000/product/${id}?email=${user?.email}`;
+    const url = `https://protected-chamber-45180.herokuapp.com/product/${id}?email=${user?.email}`;
     fetch(url, {
       headers: {
         auth: `Bearer ${localStorage.getItem("accessToken")} `,
@@ -52,7 +69,7 @@ const Purchese = () => {
     };
 
     if (_id) {
-      fetch(`http://localhost:5000/order?email=${user?.email}`, {
+      fetch(`https://protected-chamber-45180.herokuapp.com/order?email=${user?.email}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -160,7 +177,7 @@ const Purchese = () => {
               type="number"
               placeholder="Product quantity"
               className="input input-bordered w-full text-lg"
-              onChange={(e) => setQuantity(e.target.value)}
+              onChange={handleProductQuantity}
               min={minQuantity}
               max={maxQuantity}
             />
@@ -192,7 +209,7 @@ const Purchese = () => {
             />
           </div>
 
-          <button className="btn btn-secondary w-full">Place order</button>
+          <button className="btn btn-secondary w-full" disabled={disaboldBtn}>Place order</button>
         </form>
       </div>
     </section>

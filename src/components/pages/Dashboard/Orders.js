@@ -23,7 +23,7 @@ const Orders = () => {
     isLoading,
     refetch,
   } = useQuery(["myOrders", user], () =>
-  fetch(`http://localhost:5000/orders?email=${user?.email}`, {
+  fetch(`https://protected-chamber-45180.herokuapp.com/orders?email=${user?.email}`, {
     headers: {
       auth: `Bearer ${localStorage.getItem("accessToken")}`,
     },

@@ -15,7 +15,7 @@ const ManageProduct = () => {
     isLoading,
     refetch,
   } = useQuery("getAllProducts", () =>
-    fetch(`http://localhost:5000/products?email=${user?.email}`).then((res) =>
+    fetch(`https://protected-chamber-45180.herokuapp.com/products?email=${user?.email}`).then((res) =>
       res.json()
     )
   );
@@ -39,7 +39,7 @@ const ManageProduct = () => {
 
           //   Action database
           fetch(
-            `http://localhost:5000/product?email=${user?.email}&id=${product._id}`,
+            `https://protected-chamber-45180.herokuapp.com/product?email=${user?.email}&id=${product._id}`,
             {
               method: "DELETE",
               headers: {

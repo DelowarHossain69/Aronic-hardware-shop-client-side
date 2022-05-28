@@ -13,7 +13,7 @@ import delowar from "../../../images/programmer-delowar.jpg";
 const MyProtfolio = () => {
     return (
         <section className='my-12'>
-            <h2 className='text-3xl mb-5 uppercase text-center lg:text-left'>My Protfolio</h2>
+            <h2 className='text-3xl mb-5 uppercase text-center lg:text-left'>My Portfolio</h2>
 
             <div className='grid grid-cols-1 lg:grid-cols-8 gap-5'>
                 <div className='cols-span-1 lg:col-span-3 bg-white p-5 rounded'>
@@ -24,7 +24,7 @@ const MyProtfolio = () => {
                     <h2 className='text-xl text-center mt-3'>Education : Diploma in computer engineering</h2>
                 </div>
                 <div className='cols-span-1 lg:col-span-5 bg-white rounded'>
-                <h2 className='text-4xl text-center mt-5 font-bold uppercase'>
+                <h2 className='text-2xl md:text-4xl text-center mt-5 font-bold uppercase'>
                     I am an expert in : 
                 </h2>
 

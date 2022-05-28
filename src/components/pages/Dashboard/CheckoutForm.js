@@ -20,7 +20,7 @@ const CheckoutForm = ({ product }) => {
   useEffect(() => {
     if (price) {
       fetch(
-        `http://localhost:5000/create-payment-intent?email=${user?.email}`,
+        `https://protected-chamber-45180.herokuapp.com/create-payment-intent?email=${user?.email}`,
         {
           method: "POST",
           headers: {
@@ -87,7 +87,7 @@ const CheckoutForm = ({ product }) => {
         transactionId: paymentIntent?.id,
       };
 
-      fetch(`http://localhost:5000/update?email=${user?.email}&id=${_id}`, {
+      fetch(`https://protected-chamber-45180.herokuapp.com/update?email=${user?.email}&id=${_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",

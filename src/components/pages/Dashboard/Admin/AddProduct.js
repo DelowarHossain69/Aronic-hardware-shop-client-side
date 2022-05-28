@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Loading from '../../../shared/Loading/Loading';
 import auth from './../../../../firebase.init';
@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 const AddProduct = () => {
     const [user, loading] = useAuthState(auth)
+    const [availableQuantity, setAvailableQuantity] = useState(1);
     const handleForm = e => {
         e.preventDefault();
 
@@ -20,7 +21,7 @@ const AddProduct = () => {
         }
 
         // Action database
-        fetch(`http://localhost:5000/product?email=${user?.email}`, {
+        fetch(`https://protected-chamber-45180.herokuapp.com/product?email=${user?.email}`, {
             method : "POST", 
             headers : {
                 'content-type' : 'application/json',
@@ -49,9 +50,9 @@ const AddProduct = () => {
 
                 <input type="number" name="price" placeholder="Price" className="input input-bordered w-full" required />
 
-                <input type="number" name='maxQuantity' placeholder="Available quantity" className="input input-bordered w-full" required/>
+                <input type="number" name='maxQuantity' placeholder="Available quantity" className="input input-bordered w-full" onChange={(e)=> setAvailableQuantity(e.target.value)} required/>
 
-                <input type="number" name='minQuantity' placeholder="Minimum orders" className="input input-bordered w-full" required />
+                <input type="number" name='minQuantity' placeholder="Minimum orders" className="input input-bordered w-full" min='0' max={availableQuantity} required />
 
                 <input type="text" name="img" placeholder="Product image" className="input input-bordered w-full" required/>
 

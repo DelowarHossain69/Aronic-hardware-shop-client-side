@@ -16,7 +16,7 @@ const Users = () => {
     isLoading,
     refetch,
   } = useQuery("allUser", () =>
-    fetch(`http://localhost:5000/allUser?email=${user?.email}`, {
+    fetch(`https://protected-chamber-45180.herokuapp.com/allUser?email=${user?.email}`, {
         headers : {
             auth : `Bearer ${localStorage.getItem('accessToken')}`
         }
@@ -44,7 +44,7 @@ const Users = () => {
 
           //   action database
           fetch(
-            `http://localhost:5000/admin?email=${user?.email}&id=${info._id}`,
+            `https://protected-chamber-45180.herokuapp.com/admin?email=${user?.email}&id=${info._id}`,
             {
               method: "PUT",
               headers: {
@@ -77,7 +77,7 @@ const Users = () => {
 
         // Action database
         fetch(
-          `http://localhost:5000/user?email=${user?.email}&id=${info._id}`,
+          `https://protected-chamber-45180.herokuapp.com/user?email=${user?.email}&id=${info._id}`,
           {
             method: "DELETE",
             headers: {

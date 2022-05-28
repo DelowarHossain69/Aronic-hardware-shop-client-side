@@ -52,7 +52,7 @@ const Blog = () => {
       <div className="bg-white p-4 rounded space-y-4">
       <h2 className="text-2xl">Question : 14.4  Why you do not set the state directly in React. For example, if you have const [products, setProducts] = useState([]). Why you do not set products = [...] instead, you use the setProducts</h2>
 
-        <p>When we declare a state variable with useState, it returns a pair  an array with two items. The first item is the current value, and the second is a function that lets us update it. Using [0] and [1] to access them is a bit confusing because they have a specific meaning. The second returned item is itself a function. It is link this.setState()</p> 
+        <p>When we declare a state variable with useState, it returns a pair  an array with two items. The first item is the current value, and the second is a function that lets us update it. Using [0] and [1] to access them is a bit confusing because they have a specific meaning. The second returned item is itself a function. It is Link this.setState()</p> 
       </div>
 
       <div className="bg-white p-4 rounded space-y-4">
