@@ -88,7 +88,7 @@ const CheckoutForm = ({ product }) => {
       };
 
       fetch(`https://protected-chamber-45180.herokuapp.com/update?email=${user?.email}&id=${_id}`, {
-        method: "PATCH",
+        method: "PUT",
         headers: {
           "content-type": "application/json",
           auth: `Bearer ${localStorage.getItem("accessToken")}`,

@@ -14,7 +14,7 @@ const UpdateProduct = () => {
   const { data: product, isLoading, refetch } = useQuery(
     ["updateProduct", id, user],
     () =>
-      fetch(`https://protected-chamber-45180.herokuapp.com/product/${id}?email=${user?.email}`, {
+      fetch(`http://localhost:5000/product/${id}?email=${user?.email}`, {
         headers: {
           auth: `Bearer ${localStorage.getItem("accessToken")}`,
         },
@@ -41,7 +41,7 @@ const UpdateProduct = () => {
         }
 
         // Action database
-        const url = `https://protected-chamber-45180.herokuapp.com/product/${product._id}?email=${user?.email}`;
+        const url = `http://localhost:5000/product/${product._id}?email=${user?.email}`;
         fetch(url, {
             method : 'PUT',
             headers: {
